@@ -113,14 +113,14 @@ This infrastructure base provides:
 
 ### INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md
 **Location:** `docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md`  
-**Purpose:** Sync infrastructure file updates from active projects to blank template  
+**Purpose:** Sync infrastructure file updates from active projects to origin_project template  
 **Reusable:** Yes (template maintenance process is universal)  
 **When copying:** Copy unchanged  
 **Created:** 2026-01-28
 
 ### INFRASTRUCTURE_TEMPLATE_AUDIT_SOP.md
 **Location:** `docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_AUDIT_SOP.md`  
-**Purpose:** Audit blank template for drift and schedule syncs (run monthly)  
+**Purpose:** Audit origin_project template for drift and schedule syncs (run monthly)  
 **Reusable:** Yes (audit process is universal)  
 **When copying:** Copy unchanged  
 **Created:** 2026-01-28

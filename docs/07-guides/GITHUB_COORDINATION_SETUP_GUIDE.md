@@ -1,9 +1,9 @@
 # GitHub Coordination Setup Guide
 
-**Purpose:** Complete guide for setting up GitHub Projects and Discussions as the **agent coordination layer** when starting a new project. Use this when bootstrapping from the blank template so agents have a unified, worktree-consistent coordination point from day one.
+**Purpose:** Complete guide for setting up GitHub Projects and Discussions as the **agent coordination layer** when starting a new project. Use this when bootstrapping from the origin_project template so agents have a unified, worktree-consistent coordination point from day one.
 
 **Status:** Infrastructure (reusable)  
-**Applies to:** New projects using the blank template  
+**Applies to:** New projects using the origin_project template  
 **Related:** [Coordination Model](../01-orientation/COORDINATION_MODEL.md) (what lives where and why), [Bootstrap New Project](../01-orientation/BOOTSTRAP_NEW_PROJECT.md), [Migration Plan](../08-status/GITHUB_COORDINATION_MIGRATION_PLAN.md) (for existing projects)
 
 ---
@@ -15,7 +15,7 @@
 | Coordination files in `docs/08-status/` diverge across worktrees | GitHub Project and Discussions live outside the repo; same view everywhere |
 | Agents in different branches see different AGENT_DIRECTIVES | Single source of truth in GitHub |
 | Manual sync of coordination between main and worktrees | No sync needed; GitHub is external |
-| New projects must re-derive coordination logistics | This guide + blank template = ready-to-use setup |
+| New projects must re-derive coordination logistics | This guide + origin_project template = ready-to-use setup |
 
 **Principle:** Anything actively used for coordination or collaboration lives outside the repo. Feature requests and reports (created for review) live in the Project — they desync across worktrees if in docs. Versioned snapshots (decisions, finalized docs) stay in the repo.
 
@@ -239,7 +239,7 @@ When work in Projects or Discussions becomes **stable, canonical, or decided**, 
 - [ ] All 20 labels created
 - [ ] **Project** field created with project slug as option
 - [ ] All 8 views configured (Directives, Active Work, Feature Requests, Reports, Implementation Verification, QA, Integrity Check, Next Steps)
-- [ ] AI.md coordination section present (blank template has it)
+- [ ] AI.md coordination section present (origin_project template has it)
 - [ ] Project URL derivable from repo
 
 ---

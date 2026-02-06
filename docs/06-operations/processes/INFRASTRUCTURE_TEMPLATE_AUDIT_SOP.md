@@ -1,6 +1,6 @@
 # Infrastructure Template Audit — SOP
 
-**Purpose:** Standard Operating Procedure for auditing whether the blank infrastructure template (`~/Github/origin_project/`) is out of sync with active projects and needs updates. Run periodically to ensure template stays current.
+**Purpose:** Standard Operating Procedure for auditing whether the origin_project infrastructure template (`~/Github/origin_project/`) is out of sync with active projects and needs updates. Run periodically to ensure template stays current.
 
 **Status:** Active  
 **Applies To:** Periodic maintenance (recommended: monthly or after major infrastructure changes)  
@@ -26,7 +26,7 @@ This SOP ensures that:
 Before auditing:
 
 1. **Access to:**
-   - Blank template: `~/Github/origin_project/`
+   - origin_project template: `~/Github/origin_project/`
    - Active project: `~/Github/project_sourceapp/sourceapp/`
 
 2. **Read documentation:**
@@ -47,7 +47,7 @@ Before auditing:
 
 **For each infrastructure file in CORE_INFRASTRUCTURE_INVENTORY:**
 
-- [ ] **Run diff between project and blank:**
+- [ ] **Run diff between project and origin_project:**
   ```bash
   # Compare SourceApp to origin_project
   diff ~/Github/project_sourceapp/sourceapp/[infrastructure-file] \
@@ -106,7 +106,7 @@ Before auditing:
   **Date:** YYYY-MM-DD
   **Auditor:** [Agent/Person]
   **Projects Checked:** SourceApp
-  **Blank Template:** ~/Github/origin_project/
+  **origin_project Template:** ~/Github/origin_project/
   
   ---
   
@@ -142,7 +142,7 @@ Before auditing:
   
   ## Already Synced
   
-  Files that are identical between projects and blank.
+  Files that are identical between projects and origin_project.
   
   ---
   
@@ -184,15 +184,15 @@ Before auditing:
 
 ---
 
-### Step 5: Verify Blank Has All Inventory Files and Check for New Infrastructure
+### Step 5: Verify origin_project Has All Inventory Files and Check for New Infrastructure
 
 **5a. Ensure every file in CORE_INFRASTRUCTURE_INVENTORY exists in origin_project:**
 
 - [ ] **Open** `docs/01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md` and list every reusable file path.
 - [ ] **For each path,** check that `~/Github/origin_project/[path]` exists. If missing, copy from project to origin_project, then log in `~/Github/origin_project/INFRASTRUCTURE_VERSION_LOG.md`.
-- [ ] **Result:** Blank directory contains all files listed in the inventory.
+- [ ] **Result:** origin_project directory contains all files listed in the inventory.
 
-**5b. Find new project-agnostic files not yet in inventory or blank:**
+**5b. Find new project-agnostic files not yet in inventory or origin_project:**
 
 - [ ] **Scan Layer 7:** `ls docs/07-guides/INFRASTRUCTURE_*.md` — compare to origin_project; any in project but not in origin_project or inventory must be added to inventory and synced to origin_project.
 - [ ] **Scan Layer 6:** `find docs/06-operations -name "*_SOP.md" -o -name "*_PROCESS.md"` — compare to CORE_INFRASTRUCTURE_INVENTORY and to origin_project; any project-agnostic SOP/process not in inventory must be added to inventory and synced to origin_project.
@@ -200,11 +200,11 @@ Before auditing:
 
 - [ ] **For each new infrastructure file found:** Add entry to CORE_INFRASTRUCTURE_INVENTORY, copy file to `~/Github/origin_project/[same-path]`, log in INFRASTRUCTURE_VERSION_LOG, and ensure linked in docs/README.md.
 
-**Output:** Blank is complete (all inventory files present); any new infrastructure has been added to inventory and synced to origin_project.
+**Output:** origin_project is complete (all inventory files present); any new infrastructure has been added to inventory and synced to origin_project.
 
 ---
 
-### Step 6: Update Blank Template Metadata
+### Step 6: Update origin_project Template Metadata
 
 **Update template documentation:**
 
@@ -246,13 +246,13 @@ Use this checklist for each audit run:
 ## Infrastructure Audit Checklist — YYYY-MM-DD
 
 ### Pre-Audit
-- [ ] Blank template accessible: ~/Github/origin_project/
+- [ ] origin_project template accessible: ~/Github/origin_project/
 - [ ] Active projects accessible
 - [ ] CORE_INFRASTRUCTURE_INVENTORY.md reviewed
 
 ### Audit Execution
-- [ ] Verified blank has all files in CORE_INFRASTRUCTURE_INVENTORY (Step 5a)
-- [ ] Checked for new infrastructure in project not yet in inventory or blank (Step 5b)
+- [ ] Verified origin_project has all files in CORE_INFRASTRUCTURE_INVENTORY (Step 5a)
+- [ ] Checked for new infrastructure in project not yet in inventory or origin_project (Step 5b)
 - [ ] Compared all Layer 1 files (orientation)
 - [ ] Compared all Layer 6 files (operations)
 - [ ] Compared all Layer 7 files (guides)
@@ -288,7 +288,7 @@ Use this checklist for each audit run:
 echo "Infrastructure Template Audit - $(date +%Y-%m-%d)"
 echo "================================================"
 
-BLANK="$HOME/Github/blank"
+ORIGIN_PROJECT="$HOME/Github/origin_project"
 SOURCEAPP="$HOME/Github/project_sourceapp/sourceapp"
 
 # Check infrastructure files
@@ -302,9 +302,9 @@ INFRA_FILES=(
 )
 
 echo ""
-echo "Checking SourceApp vs Blank:"
+echo "Checking SourceApp vs origin_project:"
 for file in "${INFRA_FILES[@]}"; do
-  if ! diff -q "$SOURCEAPP/$file" "$BLANK/$file" > /dev/null 2>&1; then
+  if ! diff -q "$SOURCEAPP/$file" "$ORIGIN_PROJECT/$file" > /dev/null 2>&1; then
     echo "  ⚠️  DIFF: $file"
   fi
 done
@@ -332,15 +332,15 @@ echo "Audit complete. Review differences above."
 
 **Problem:** Project has improved SOP, origin_project is outdated
 
-**Solution:** Sync project → blank (follow sync SOP)
+**Solution:** Sync project → origin_project (follow sync SOP)
 
 ---
 
-### Issue 2: Blank Has Updates, Projects Are Behind
+### Issue 2: origin_project Has Updates, Projects Are Behind
 
-**Problem:** Blank was updated but not synced to active projects
+**Problem:** origin_project was updated but not synced to active projects
 
-**Solution:** Sync blank → projects (reverse direction)
+**Solution:** Sync origin_project → projects (reverse direction)
 
 ---
 
@@ -359,7 +359,7 @@ echo "Audit complete. Review differences above."
 
 - [Infrastructure Template Sync SOP](INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md) — How to sync changes
 - [Core Infrastructure Inventory](../../01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md) — What is infrastructure
-- [Bootstrap New Project](../../01-orientation/BOOTSTRAP_NEW_PROJECT.md) — How new projects use blank
+- [Bootstrap New Project](../../01-orientation/BOOTSTRAP_NEW_PROJECT.md) — How new projects use origin_project
 
 ---
 
@@ -368,7 +368,7 @@ echo "Audit complete. Review differences above."
 - Run this audit monthly or after major infrastructure work
 - Critical changes should be synced immediately (don't wait for next audit)
 - Document all audits for traceability
-- Blank template should be version controlled (Git)
+- origin_project template should be version controlled (Git)
 - Consider automating comparison with script
 
 ---

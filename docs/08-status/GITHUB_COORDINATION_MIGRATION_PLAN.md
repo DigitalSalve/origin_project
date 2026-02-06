@@ -90,7 +90,7 @@
 
 | Scenario | Path |
 |----------|------|
-| **New project** (blank template) | Run [GitHub Coordination Setup Guide](../07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md); coordination is GitHub from start |
+| **New project** (origin_project template) | Run [GitHub Coordination Setup Guide](../07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md); coordination is GitHub from start |
 | **Existing project** (docs-based) | Execute migration phases above; move from docs to GitHub |
 
 ---

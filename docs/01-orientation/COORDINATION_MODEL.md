@@ -1,6 +1,6 @@
 # Coordination Model — What Lives Where and Why
 
-**Purpose:** Single source of truth for the coordination model: what lives in GitHub Project vs docs, the reasoning, and the full flow. Use when onboarding, adopting blank, or deciding where to put coordination artifacts.
+**Purpose:** Single source of truth for the coordination model: what lives in GitHub Project vs docs, the reasoning, and the full flow. Use when onboarding, adopting origin_project, or deciding where to put coordination artifacts.
 
 **Status:** Infrastructure (reusable)  
 **Related:** [GitHub Coordination Setup Guide](../07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md), [Migration Plan](../08-status/GITHUB_COORDINATION_MIGRATION_PLAN.md)
@@ -106,13 +106,13 @@ When using **worktrees** (multiple checkouts of the same repo for parallel work)
 
 **New projects:** Run [GitHub Coordination Setup Guide](../07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md); coordination is Project from day one.
 
-**Existing projects with docs-based coordination:** Run [Migration Plan](../08-status/GITHUB_COORDINATION_MIGRATION_PLAN.md) after adopting blank.
+**Existing projects with docs-based coordination:** Run [Migration Plan](../08-status/GITHUB_COORDINATION_MIGRATION_PLAN.md) after adopting origin_project.
 
 ---
 
 ## Adoption
 
-When **adopting blank into an existing project**:
+When **adopting origin_project into an existing project**:
 
 1. Copy infrastructure per [Adoption SOP](../06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md)
 2. Set up GitHub Project per [Setup Guide](../07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md) if not present

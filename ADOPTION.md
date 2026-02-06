@@ -1,8 +1,8 @@
-# Adopt Blank
+# Adopt Origin Project
 
-**Tell your architect:** Adopt blank into [project name].
+**Tell your architect:** Adopt origin_project into [project name].
 
-Example: *Adopt blank into cheqpass*
+Example: *Adopt origin_project into cheqpass*
 
 Then follow [Infrastructure Template Adoption SOP](docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md).
 

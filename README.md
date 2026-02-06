@@ -29,7 +29,7 @@ This is a **complete documentation infrastructure base** with:
 
 ```bash
 # 1. Copy this folder to your new project
-cp -r ~/Github/blank ~/Github/your-new-project
+cp -r ~/Github/origin_project ~/Github/your-new-project
 
 # 2. Update project identity
 cd ~/Github/your-new-project
@@ -45,7 +45,7 @@ cd ~/Github/your-new-project
 
 ### Existing project (adoption):
 
-Tell your architect: **Adopt blank into [project name]**. See [ADOPTION.md](ADOPTION.md).
+Tell your architect: **Adopt origin_project into [project name]**. See [ADOPTION.md](ADOPTION.md).
 
 ---
 

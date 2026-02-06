@@ -8,7 +8,7 @@
 
 ```bash
 # Copy this template to your new project
-cp -r ~/Github/blank ~/Github/your-new-project
+cp -r ~/Github/origin_project ~/Github/your-new-project
 cd ~/Github/your-new-project
 ```
 
@@ -78,7 +78,7 @@ Edit `docs/01-orientation/PROJECT_IDENTITY.md`:
 ## Need Help?
 
 - **New project:** `docs/01-orientation/BOOTSTRAP_NEW_PROJECT.md`
-- **Existing project (adopt blank):** `docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md`
+- **Existing project (adopt origin_project):** `docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md`
 - **Infrastructure list:** `docs/01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md`
 - **What's included:** `MANIFEST.md`
 

@@ -77,10 +77,10 @@ If this commit **completes** a feature:
 
 If this commit **adds new project-agnostic documentation** (e.g. new SOP in Layer 6, new `INFRASTRUCTURE_*.md` in Layer 7):
 
-- [ ] **Architect to add** — Do **not** add to CORE_INFRASTRUCTURE_INVENTORY or sync to blank yourself. Only the Architect Agent may change infrastructure files. Create a Project item (label `coordination:q-a`, target `agent:architect`) requesting: add to inventory, sync to blank. Or invoke Architect as sub-agent.
-- [ ] **Note in commit** — If you cannot reach Architect before commit, add to commit message: `[Infrastructure: Architect to add to CORE_INFRASTRUCTURE_INVENTORY and sync to blank]`.
+- [ ] **Architect to add** — Do **not** add to CORE_INFRASTRUCTURE_INVENTORY or sync to origin_project yourself. Only the Architect Agent may change infrastructure files. Create a Project item (label `coordination:q-a`, target `agent:architect`) requesting: add to inventory, sync to origin_project. Or invoke Architect as sub-agent.
+- [ ] **Note in commit** — If you cannot reach Architect before commit, add to commit message: `[Infrastructure: Architect to add to CORE_INFRASTRUCTURE_INVENTORY and sync to origin_project]`.
 
-**Rule:** New project-agnostic infrastructure must be added to the inventory and synced to blank by the Architect; Documentation Agent defers.
+**Rule:** New project-agnostic infrastructure must be added to the inventory and synced to origin_project by the Architect; Documentation Agent defers.
 
 ---
 
@@ -96,6 +96,6 @@ If this commit **adds new project-agnostic documentation** (e.g. new SOP in Laye
 
 - **AI.md** — “Documentation Process Enforcement”, “Feature Request Completion Process”, “When creating new documentation structures”, “Before making changes”
 - [Documentation Process](../processes/DOCUMENTATION_PROCESS.md) — When/where to update, working checklist, feature request creation and completion
-- [Infrastructure Template Sync SOP](../processes/INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md) — When adding new project-agnostic infrastructure, sync to blank and update inventory
+- [Infrastructure Template Sync SOP](../processes/INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md) — When adding new project-agnostic infrastructure, sync to origin_project and update inventory
 - [docs/README.md](../../README.md) — Navigation spine; all new docs must be linked in the appropriate layer
 - [Repo Integrity Check SOP](REPO_INTEGRITY_CHECK_SOP.md) — Run at least once per calendar day; if there is no log entry for today, run **before** the next operation (including pre-commit doc checks)

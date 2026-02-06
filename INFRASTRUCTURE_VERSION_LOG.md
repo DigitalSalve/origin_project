@@ -1,6 +1,6 @@
 # Infrastructure Version Log
 
-**Purpose:** Track all updates to the blank infrastructure template. Append new entries when infrastructure is synced or improved.
+**Purpose:** Track all updates to the origin_project infrastructure template. Append new entries when infrastructure is synced or improved.
 
 **Location:** `~/Github/origin_project/INFRASTRUCTURE_VERSION_LOG.md`
 
@@ -41,9 +41,9 @@
 
 | Date | File(s) Changed | Type | Description | Version |
 |------|----------------|------|-------------|---------|
-| 2026-01-28 | INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md | New | SOP for syncing infrastructure changes project → blank | 1.0 |
+| 2026-01-28 | INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md | New | SOP for syncing infrastructure changes project → origin_project | 1.0 |
 | 2026-01-28 | INFRASTRUCTURE_TEMPLATE_AUDIT_SOP.md | New | SOP for auditing template drift and scheduling syncs | 1.0 |
-| 2026-01-28 | INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md | New | SOP for adopting blank into existing projects; copy vs merge, placeholders, agent instructions | 1.0 |
+| 2026-01-28 | INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md | New | SOP for adopting origin_project into existing projects; copy vs merge, placeholders, agent instructions | 1.0 |
 | 2026-01-28 | DOCUMENTATION_PROCESS, GITHUB_COORDINATION_*, GUIDELINES, docs/README, IMPLEMENTATION_VERIFICATION_SOP, SCREEN/BACKEND_EXAMINATION_SOP, GETTING_STARTED, CORE_INFRASTRUCTURE_INVENTORY, FEATURE_REQUEST_TODO | Sync | Feature requests move to GitHub Project (not docs); desync across worktrees. FR = Project item; spec in item body | 1.0 |
 | 2026-01-28 | IMPLEMENTATION_VERIFICATION_SOP (full), BOOTSTRAP_NEW_PROJECT, GLOBAL_AI_AGENT_RULES, PROJECT_IDENTITY, QUICK_START, README, ADOPTION_SOP, FEATURE_REQUEST_TODO, DECISION_LOG, SCREEN_EXAMINATION_SOP, CORE_INFRASTRUCTURE_INVENTORY | Sync | Complete feature-request→Project migration; all remaining docs/08-status/feature-requests refs updated | 1.0 |
 | 2026-01-28 | GITHUB_COORDINATION_MIGRATION_PLAN, GITHUB_COORDINATION_SETUP_GUIDE | Sync | Reports reclassified: created for review in collaboration; move to Project (coordination:report); desync across worktrees | 1.0 |
@@ -55,8 +55,8 @@
 | 2026-01-28 | Full sync | Sync | Refreshed all infrastructure files from sourceapp; created missing folder structure (02-canon, 03-architecture, 04-behavior, 05-integrations, 06-operations/architecture, 08-status/decisions, qa, scope-of-work, user-flows); added READMEs and format templates; sanitized docs/README for project-specific content | 1.0 |
 | 2026-01-28 | GITHUB_COORDINATION_SETUP_GUIDE, INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP, DOCUMENTATION_PROCESS | Sync | Project field: add as column in views, set on existing items; Assignee: explicit --assignee @me when creating items via gh issue create; adoption checklist includes Project field | 1.0 |
 | 2026-01-28 | AI.md, docs/README.md, docs/08-status/reports/README.md, docs/01-orientation/PROJECT_DOCUMENTATION_HIERARCHY.md | Sync | Before making changes section in AI.md; Process table coordination:q-a label; reports Project-based flow (coordination:report); fix typo in PROJECT_DOCUMENTATION_HIERARCHY | 1.0 |
-| 2026-01-28 | docs/README, CORE_INFRASTRUCTURE_INVENTORY, REPORT_CREATION_AND_DELIVERY_SOP, agent-coordination/README, feature-requests/README, user-flows/README, USER_FLOW_IDENTIFICATION_SOP | Sync | Blank audit: remove broken links (Layer 4, Layer 8); Project-based reports throughout; agent-coordination coordination:q-a; feature-requests deprecation; CORE_INFRASTRUCTURE agent-coordination/reports | 1.0 |
-| 2026-01-28 | GAP_IDENTIFICATION_SOP, SCOPE_OF_WORK_SOP, docs/README | Sync | Project-primary: feature gaps/infra gaps → Project items; FEATURE_REQUEST_TODO → close items in Project; remove broken sourceapp-specific Cookies link from blank | 1.0 |
+| 2026-01-28 | docs/README, CORE_INFRASTRUCTURE_INVENTORY, REPORT_CREATION_AND_DELIVERY_SOP, agent-coordination/README, feature-requests/README, user-flows/README, USER_FLOW_IDENTIFICATION_SOP | Sync | origin_project audit: remove broken links (Layer 4, Layer 8); Project-based reports throughout; agent-coordination coordination:q-a; feature-requests deprecation; CORE_INFRASTRUCTURE agent-coordination/reports | 1.0 |
+| 2026-01-28 | GAP_IDENTIFICATION_SOP, SCOPE_OF_WORK_SOP, docs/README | Sync | Project-primary: feature gaps/infra gaps → Project items; FEATURE_REQUEST_TODO → close items in Project; remove broken sourceapp-specific Cookies link from origin_project | 1.0 |
 | 2026-01-28 | ACTIVE_WORK_SOP, MIGRATION_PROCESS | Sync | Project migration: ACTIVE_WORK feature request → Project item; MIGRATION_PROCESS plans/tracking → Project (from sourceapp) | 1.0 |
 | 2026-01-28 | AGENT_COORDINATION_QUICK_START, AGENT_SESSION_HOOK_SOP, AGENT_PROMPTS, AI.md | Sync | Worktree hygiene: step 0 — commit uncommitted changes before continuing; worktree update directive includes commit first | 1.0 |
 | 2026-01-28 | SUBAGENT_TRANSITION_PLAN.md, .cursor/agents/ | New | Architect + Cursor subagents; transition from separate chats; 5 subagents (architect, backend, web, webapp, mobile); each documents own work; Project-first flow | 1.0 |

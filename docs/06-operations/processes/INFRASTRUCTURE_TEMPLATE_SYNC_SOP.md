@@ -65,7 +65,7 @@ Before syncing infrastructure:
 
 ---
 
-### Step 2: Sync to Blank Template
+### Step 2: Sync to origin_project Template
 
 **Copy updated file to origin_project template:**
 
@@ -185,7 +185,7 @@ Before syncing infrastructure:
 
 ---
 
-## Verify Blank Has All Inventory Files
+## Verify origin_project Has All Inventory Files
 
 **Periodically (e.g. during audit or before release) check that the origin_project template is complete:**
 
@@ -193,7 +193,7 @@ Before syncing infrastructure:
 - [ ] **For each path,** verify the file exists at `~/Github/origin_project/[path]`. If it is missing, copy from this project to origin_project and log the sync.
 - [ ] **Scan this project** for new infrastructure not yet in the inventory (e.g. `docs/06-operations/**/*_SOP.md`, `docs/07-guides/INFRASTRUCTURE_*.md`). Any project-agnostic file that belongs in the template must be added to the inventory and copied to origin_project.
 
-**Output:** Blank directory contains all files in the inventory; any new infrastructure has been added to inventory and synced to origin_project.
+**Output:** origin_project directory contains all files in the inventory; any new infrastructure has been added to inventory and synced to origin_project.
 
 ---
 
@@ -246,7 +246,7 @@ Reason: [why changed]
 - [ ] Synced to other projects: [list or N/A]
 - [ ] Documented sync in version log
 - [ ] Committed to Git (if applicable)
-- [ ] (Periodic) Verified blank has all files in CORE_INFRASTRUCTURE_INVENTORY; synced any missing
+- [ ] (Periodic) Verified origin_project has all files in CORE_INFRASTRUCTURE_INVENTORY; synced any missing
 
 Synced by: [agent/person]
 ```
@@ -303,10 +303,10 @@ echo "YYYY-MM-DD: Improved SCREEN_EXAMINATION_SOP - added error handling check" 
 ## Notes
 
 - **Sync direction:** Active projects → origin_project template → other projects
-- **Blank is source of truth:** The template is authoritative for infrastructure
+- **origin_project is source of truth:** The template is authoritative for infrastructure
 - **Project-specific stays separate:** Never sync project-specific content
 - **Bidirectional:** Projects can also pull updates from origin_project
-- **Version control recommended:** Keep blank in Git for history
+- **Version control recommended:** Keep origin_project in Git for history
 
 ---
 
@@ -315,7 +315,7 @@ echo "YYYY-MM-DD: Improved SCREEN_EXAMINATION_SOP - added error handling check" 
 - **CORE_INFRASTRUCTURE_INVENTORY.md:** Defines what is infrastructure (must be checked first)
 - **BOOTSTRAP_NEW_PROJECT.md:** Uses origin_project template to start new projects
 - **DOCUMENTATION_PROCESS.md:** When infrastructure is documented as part of features
-- **REPO_INTEGRITY_CHECK_SOP.md:** Can check if project infrastructure is out of sync with blank
+- **REPO_INTEGRITY_CHECK_SOP.md:** Can check if project infrastructure is out of sync with origin_project
 
 ---
 

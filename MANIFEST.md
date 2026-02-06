@@ -45,7 +45,7 @@ This is a **ready-to-use documentation infrastructure** extracted from productio
 ## Directory Structure
 
 ```
-~/Github/blank/
+~/Github/origin_project/
 ├─ AI.md                                    (Root AI guide)
 ├─ README.md                                (Template overview)
 ├─ MANIFEST.md                              (This file)
@@ -108,8 +108,8 @@ This is a **ready-to-use documentation infrastructure** extracted from productio
 ### Step 1: Copy to Your Project
 
 ```bash
-# Copy entire blank folder to your project location
-cp -r ~/Github/blank ~/Github/your-project-name
+# Copy entire origin_project folder to your project location
+cp -r ~/Github/origin_project ~/Github/your-project-name
 cd ~/Github/your-project-name
 ```
 

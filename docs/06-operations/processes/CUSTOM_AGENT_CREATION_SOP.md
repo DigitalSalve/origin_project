@@ -404,9 +404,9 @@ You create and maintain project documentation.
 4. Test with simple directive
 5. Train team on when to use
 
-**When infrastructure updates from blank:**
+**When infrastructure updates from origin_project:**
 
-- Custom agents are project-specific (don't sync to blank)
+- Custom agents are project-specific (don't sync to origin_project)
 - Pull generic agent improvements, adapt for custom agents
 - Re-test custom agents after updates
 

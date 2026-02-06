@@ -1,13 +1,13 @@
-# Blank Template Audit
+# Origin Project Template Audit
 
 **Date:** 2026-01-28  
-**Purpose:** Identify orphaned content, misleading instructions, and flow non-compliance in the blank infrastructure template.
+**Purpose:** Identify orphaned content, misleading instructions, and flow non-compliance in the origin_project infrastructure template.
 
 ---
 
 ## Executive Summary
 
-Blank contains **project-specific contamination** (sourceapp references, broken links to non-existent files) and **flow inconsistencies** (REPORT_LOG vs Project-based reports; docs-based feature-requests vs Project). Several SOPs and docs still reference deprecated patterns. Fixes required for template compliance.
+origin_project contains **project-specific contamination** (sourceapp references, broken links to non-existent files) and **flow inconsistencies** (REPORT_LOG vs Project-based reports; docs-based feature-requests vs Project). Several SOPs and docs still reference deprecated patterns. Fixes required for template compliance.
 
 ---
 
@@ -22,13 +22,13 @@ Blank contains **project-specific contamination** (sourceapp references, broken 
 
 ## 2. Broken Links (docs/README)
 
-| Link | Target | Exists in blank? |
-|------|--------|------------------|
-| Layer 4: AUTHENTICATION_FLOWS, COOKIES_AND_SESSION, API_MATRIX, UI_INTEGRATION_POINTS, DESIGN_SYSTEM, SUBSCRIPTION_TIERS, INTENDED_USER_FLOWS | `04-behavior/*.md` | No — blank has only `04-behavior/README.md` |
+| Link | Target | Exists in origin_project? |
+|------|--------|--------------------------|
+| Layer 4: AUTHENTICATION_FLOWS, COOKIES_AND_SESSION, API_MATRIX, UI_INTEGRATION_POINTS, DESIGN_SYSTEM, SUBSCRIPTION_TIERS, INTENDED_USER_FLOWS | `04-behavior/*.md` | No — origin_project has only `04-behavior/README.md` |
 | Layer 3: INTEGRATION_PLATFORMS | `03-architecture/INTEGRATION_PLATFORMS.md` | No |
-| Layer 8: 2026-01-27/2026-01-28 Screen Examination Reports | `08-status/screen-examination/*.md` | No — blank has only README |
+| Layer 8: 2026-01-27/2026-01-28 Screen Examination Reports | `08-status/screen-examination/*.md` | No — origin_project has only README |
 | Layer 8: 2026-01-27 Backend Examination Report | `08-status/backend-examination/*.md` | No |
-| Quick Reference: "Understand web implementation" | sourceapp-specific report + SOURCEAPP_FRONTEND_BACKEND_ARCHITECTURE_SOP | No — blank has no SOURCEAPP SOP |
+| Quick Reference: "Understand web implementation" | sourceapp-specific report + SOURCEAPP_FRONTEND_BACKEND_ARCHITECTURE_SOP | No — origin_project has no SOURCEAPP SOP |
 
 ---
 
@@ -38,7 +38,7 @@ Blank contains **project-specific contamination** (sourceapp references, broken 
 |-----|-------|
 | **docs/README Layer 8** | "Reports Log" and "REPORT_LOG" — reports/README is Project-based (`coordination:report`) |
 | **docs/README Quick Reference** | "reports in 08-status/reports/ with log in REPORT_LOG" — contradicts Project flow |
-| **CORE_INFRASTRUCTURE_INVENTORY** | agent-coordination: "AGENT_DIRECTIVES + AGENT_COORDINATION_LOG" — coordination is in Project; those files don't exist in blank |
+| **CORE_INFRASTRUCTURE_INVENTORY** | agent-coordination: "AGENT_DIRECTIVES + AGENT_COORDINATION_LOG" — coordination is in Project; those files don't exist in origin_project |
 | **CORE_INFRASTRUCTURE_INVENTORY** | reports: "REPORT_LOG format" — should note Project-based |
 | **REPORT_CREATION_AND_DELIVERY_SOP** | Heavy REPORT_LOG usage; no Project-based flow as primary |
 | **agent-coordination/README** | "Project items with label `agent-coordination`" — Process table says `coordination:q-a` for Q&A |
@@ -60,7 +60,7 @@ Blank contains **project-specific contamination** (sourceapp references, broken 
 | **REPORT_LOG.md** | sourceapp report entries |
 | **ACTIVE_WORK_LOG.md** | sourceapp check-out history |
 
-**Note:** Blank is a template. Status docs (CURRENT_STATUS, FEATURE_REQUEST_TODO, ACTIVE_WORK_LOG, REPORT_LOG) should be placeholder/empty or explicitly "fill per project." Heavy sourceapp content makes blank unsuitable as a clean template.
+**Note:** origin_project is a template. Status docs (CURRENT_STATUS, FEATURE_REQUEST_TODO, ACTIVE_WORK_LOG, REPORT_LOG) should be placeholder/empty or explicitly "fill per project." Heavy sourceapp content makes origin_project unsuitable as a clean template.
 
 ---
 

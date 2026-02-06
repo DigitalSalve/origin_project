@@ -28,7 +28,7 @@ From the [Cursor docs](https://cursor.com/docs/context/subagents):
 
 3. **Foreground vs background** — Foreground blocks until done; background returns immediately. Use foreground for sequential work, background for parallel.
 
-4. **User vs project subagents** — User subagents (`~/.cursor/agents/`) work across all projects. Project subagents (`.cursor/agents/`) are repo-specific. We want **user-level** for sourceapp, blank, future projects.
+4. **User vs project subagents** — User subagents (`~/.cursor/agents/`) work across all projects. Project subagents (`.cursor/agents/`) are repo-specific. We want **user-level** for sourceapp, origin_project, future projects.
 
 5. **Invocation** — `/backend implement the auth endpoint` or "Use the backend subagent to implement the auth endpoint." Parallel: "Review the API changes and update the documentation in parallel."
 
@@ -66,7 +66,7 @@ User → Architect (main chat)
 Because subagents start with clean context, Architect's invocation prompt must include:
 
 1. **Project item** — "Look at Project item #N (or URL) for your instructions." The item body contains the full task.
-2. **MAIN_REPO_PATH** — e.g. `~/Github/project_sourceapp/sourceapp` (or blank, or future project)
+2. **MAIN_REPO_PATH** — e.g. `~/Github/project_sourceapp/sourceapp` (or origin_project, or future project)
 3. **Workspace path** — Current worktree if different
 4. **Repo** — For `gh` commands (derive from `git remote`)
 
@@ -74,7 +74,7 @@ Because subagents start with clean context, Architect's invocation prompt must i
 
 ## User Subagents
 
-Location: `~/.cursor/agents/` (works across sourceapp, blank, future projects)
+Location: `~/.cursor/agents/` (works across sourceapp, origin_project, future projects)
 
 | File | Name | Description (when Architect invokes) |
 |------|------|-------------------------------------|

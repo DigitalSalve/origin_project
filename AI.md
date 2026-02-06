@@ -30,7 +30,7 @@ Behave like a senior engineer onboarding to an existing system. Read before acti
 
 ## Adoption
 
-**When instructed to adopt blank into another project:** Follow [Infrastructure Template Adoption SOP](docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md). Source: blank. Target: the project the user named.
+**When instructed to adopt origin_project into another project:** Follow [Infrastructure Template Adoption SOP](docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md). Source: origin_project. Target: the project the user named.
 
 ---
 

@@ -64,8 +64,8 @@ Use this file as the single pointer for all docs-spine process. Details live in 
 | **Agent coordination (directives, Q&A)** | [Agent Coordination SOP](06-operations/coordination/AGENT_COORDINATION_SOP.md); GitHub Project Directives view and `coordination:q-a` items. Setup: [GitHub Coordination Setup Guide](07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md) |
 | **Creating new documentation** | See [Maintenance](#maintenance) below; add new items to this file in the correct layer; never create orphaned docs |
 | **When to stop and ask** | When change affects funds/identity/audit; docs contradict; file seems to belong to multiple layers; behavior not documented; unsure if data belongs in existing file |
-| **Infrastructure template maintenance** | [Infrastructure Template Sync SOP](06-operations/processes/INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md), [Infrastructure Template Audit SOP](06-operations/processes/INFRASTRUCTURE_TEMPLATE_AUDIT_SOP.md); blank template: `~/Github/blank/` |
-| **Adopt blank into existing project** | [Infrastructure Template Adoption SOP](06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md) — Apply blank to existing project; merge, don't wipe |
+| **Infrastructure template maintenance** | [Infrastructure Template Sync SOP](06-operations/processes/INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md), [Infrastructure Template Audit SOP](06-operations/processes/INFRASTRUCTURE_TEMPLATE_AUDIT_SOP.md); origin_project template: `~/Github/origin_project/` |
+| **Adopt origin_project into existing project** | [Infrastructure Template Adoption SOP](06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md) — Apply origin_project to existing project; merge, don't wipe |
 
 ---
 
@@ -188,8 +188,8 @@ Add links here when created.
 - [Scope of Work SOP](06-operations/processes/SCOPE_OF_WORK_SOP.md) — Create a Scope of Work from expected project requirements and define/work to complete them; project-agnostic culmination of planning (canon, architecture, behavior, examinations, feature requests); output: `08-status/scope-of-work/SCOPE_OF_WORK.md`
 - [Gap Identification SOP](06-operations/processes/GAP_IDENTIFICATION_SOP.md) — Systematic process for identifying and classifying feature gaps, infrastructure gaps, and scope gaps; scope gaps resolved in Project Scope
 - [Product Boundary Breach SOP](06-operations/processes/PRODUCT_BOUNDARY_BREACH_SOP.md) — **Before action:** Determine if an action breaches file set, feature scope, or repository boundaries; if breach detected, notify user and stop until explicit approval
-- [Infrastructure Template Sync SOP](06-operations/processes/INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md) — **Infrastructure maintenance.** How to sync infrastructure file updates from active projects to blank template (`~/Github/blank/`); ensures template stays current when infrastructure improves
-- [Infrastructure Template Audit SOP](06-operations/processes/INFRASTRUCTURE_TEMPLATE_AUDIT_SOP.md) — **Infrastructure maintenance.** How to audit blank template for drift and schedule syncs; run monthly to detect infrastructure improvements not yet in template
+- [Infrastructure Template Sync SOP](06-operations/processes/INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md) — **Infrastructure maintenance.** How to sync infrastructure file updates from active projects to origin_project template (`~/Github/origin_project/`); ensures template stays current when infrastructure improves
+- [Infrastructure Template Audit SOP](06-operations/processes/INFRASTRUCTURE_TEMPLATE_AUDIT_SOP.md) — **Infrastructure maintenance.** How to audit origin_project template for drift and schedule syncs; run monthly to detect infrastructure improvements not yet in template
 - [Agent Customization SOP](06-operations/processes/AGENT_CUSTOMIZATION_SOP.md) — Customize generic agents with project-specific context (paths, domain, APIs, tech stack)
 - [Custom Agent Creation SOP](06-operations/processes/CUSTOM_AGENT_CREATION_SOP.md) — Create domain-specific or workflow-specific custom agents
 - [Agent Testing and Validation SOP](06-operations/processes/AGENT_TESTING_VALIDATION_SOP.md) — Test and validate agent functionality with Max Mode and Task tool

@@ -2,7 +2,7 @@
 
 **Date:** 2026-01-28  
 **Source:** SourceApp project (~/Github/project_sourceapp/sourceapp)  
-**Destination:** ~/Github/blank/  
+**Destination:** ~/Github/origin_project/  
 **Status:** ✅ Complete
 
 ---
@@ -86,14 +86,14 @@ Successfully copied all core infrastructure files to create a reusable project t
 - Layer 6 /architecture/[PROJECT]_*.md (project-specific SOPs)
 - Layer 8 contents (actual feature requests, reports, logs)
 
-**These folders exist but are empty/templates in the blank structure.**
+**These folders exist but are empty/templates in the origin_project structure.**
 
 ---
 
 ## Directory Tree
 
 ```
-~/Github/blank/
+~/Github/origin_project/
 ├─ AI.md
 ├─ README.md
 ├─ MANIFEST.md
@@ -131,7 +131,7 @@ Successfully copied all core infrastructure files to create a reusable project t
 
 ## Next Steps
 
-1. **For new project:** Copy `~/Github/blank` to project location
+1. **For new project:** Copy `~/Github/origin_project` to project location
 2. **Update:** `docs/01-orientation/PROJECT_IDENTITY.md`
 3. **Fill:** Layers 2-5 with project content
 4. **Use:** Follow SOPs and patterns as you build

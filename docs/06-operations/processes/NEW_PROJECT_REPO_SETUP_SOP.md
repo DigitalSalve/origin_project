@@ -23,7 +23,7 @@ This SOP defines the order and checks.
 
 ## Prerequisites
 
-- Blank template (or template repo) available
+- origin_project template (or template repo) available
 - GitHub account with repo creation access
 - `gh` CLI installed and authenticated (for coordination setup)
 

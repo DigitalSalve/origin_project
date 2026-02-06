@@ -204,7 +204,7 @@ cat > .cursor/agents/CUSTOMIZATION_LOG.md << 'EOF'
 
 ## Maintenance
 
-When pulling blank updates:
+When pulling origin_project updates:
 1. Merge generic improvements
 2. Preserve project-specific sections
 3. Re-test delegation
