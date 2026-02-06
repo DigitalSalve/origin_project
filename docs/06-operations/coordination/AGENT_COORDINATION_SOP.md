@@ -19,7 +19,12 @@
 
 **Assignee:** Always the GitHub user (active user by default). Agents never assign to "agent." Use labels for role routing.
 
-**Project URL:** Derive from repo: `https://github.com/{owner}/{repo}/projects`. Ask user if repo unclear.
+**Project URL and repo owner:** Read from [PROJECT_IDENTITY](../../01-orientation/PROJECT_IDENTITY.md). These are **established during adoption** and are permanent. Do not infer at session start.
+
+**Owner vs current user:** At session start, if `gh api user --jq .login` ≠ repo owner (from PROJECT_IDENTITY):
+1. Notify: "Repo owner is [owner]; you are [current_user]. Project items live under [owner]'s account."
+2. Test access: `gh project list --owner [owner]` or try to view a Project item
+3. If access fails: "Cannot access [owner]'s projects. Contact [owner] to grant access to the Agent Coordination project. Until access is granted, coordination features are unavailable."
 
 **Safeguard:** Only create or update items in the project for this workspace's repo. Before creating or updating items, confirm the Project URL matches your workspace repo (from `git remote`). When reading items, filter by **Project** field = project slug from PROJECT_IDENTITY to ensure you only act on items for this repo. Do not use `gh project list` without a repo filter.
 
@@ -66,7 +71,7 @@ Open
 ```
 
 **Labels:** `coordination:q-a`, plus role label (e.g. `agent:architect`)  
-**Project field:** Set to project slug (e.g. `sourceapp`)  
+**Project field:** Set to project slug (from PROJECT_IDENTITY)  
 **Assign:** User (active user by default; never assign to "agent")
 
 ### Response format (target agent adds comment)

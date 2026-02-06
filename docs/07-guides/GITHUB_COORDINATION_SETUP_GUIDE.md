@@ -25,9 +25,11 @@
 
 **Derive from repo:** The Project URL is `https://github.com/{owner}/{repo}/projects`. Agents infer the repo from the workspace (e.g. `git remote`, workspace path). If the repo is unclear, **ask the user**.
 
+**Use repo owner's Project:** Coordination uses the **repo owner's** GitHub Project. The repo owner is **established during adoption** and recorded in PROJECT_IDENTITY. Agents read it at session start; it is not inferred. Create and link the Project under that owner during adoption (see [INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP](../06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md) Step 5).
+
 No hardcoded URL needed. After creating the Project, **link it to the repo** so it appears in the repo's Projects tab.
 
-**Project number for API/CLI:** When using `gh project item-create` or the GraphQL API, you need the project number. It appears in the URL when viewing the project: `https://github.com/{owner}/{repo}/projects/1` → project number is `1`. Use `gh project list --owner @me` to list projects; the number is the first column. For repo-scoped access, open the repo's Projects tab and use the number from that project's URL.
+**Project number for API/CLI:** When using `gh project item-create` or the GraphQL API, you need the project number. It appears in the URL when viewing the project: `https://github.com/{owner}/{repo}/projects/1` → project number is `1`. Use `gh project list --owner [owner]` (repo owner) to list projects; the number is the first column. For repo-scoped access, open the repo's Projects tab and use the number from that project's URL.
 
 ---
 
@@ -93,12 +95,55 @@ gh --version
 
 ## Setup Steps
 
-### Step 1: Create GitHub Project
+### Step 1: Derive repo owner and create GitHub Project
 
 ```bash
 cd /path/to/your-project
-gh project create --owner @me --title "Agent Coordination"
+# Derive owner/repo from remote
+OWNER=$(gh repo view --json owner -q .owner.login)
+REPO=$(gh repo view --json name -q .name)
+CURRENT_USER=$(gh api user --jq .login)
+
+echo "Repo owner: $OWNER"
+echo "Current user: $CURRENT_USER"
+
+# Check if owner == current user
+if [ "$OWNER" = "$CURRENT_USER" ]; then
+  echo "You are the repo owner. Creating project under @me."
+  gh project create --owner @me --title "Agent Coordination"
+else
+  echo "Repo owner differs from current user. Testing access..."
+  # Test if you can access owner's projects
+  if gh project list --owner "$OWNER" > /dev/null 2>&1; then
+    echo "You have access. Attempting to create under $OWNER..."
+    gh project create --owner "$OWNER" --title "Agent Coordination" || {
+      echo "Creation failed. See permission fallback below."
+      exit 1
+    }
+  else
+    echo "Cannot access $OWNER's projects. See permission fallback below."
+    exit 1
+  fi
+fi
 ```
+
+**Permission fallback (when current user ≠ owner):**
+
+If you cannot create projects under the repo owner:
+
+1. **Ask the repo owner to:**
+   - Create "Agent Coordination" project: `gh project create --owner @me --title "Agent Coordination"`
+   - Link to repo: `gh project link [n] --repo [owner/repo]`
+   - Create labels, field, views (Steps 3–4)
+   - Grant you access: Project → Settings → Manage access → Add collaborator
+   - Share project number and confirm PROJECT_IDENTITY setup
+
+2. **Alternative (less ideal):** Create under your account:
+   ```bash
+   gh project create --owner @me --title "Agent Coordination ([project-name])"
+   gh project link [n] --repo "$OWNER/$REPO"
+   ```
+   **Record in PROJECT_IDENTITY:** Note that Project is under your account, not repo owner. Add comment: "Project under [your-user], not repo owner [owner]."
 
 Or via UI: Repo → Projects → New project.
 
@@ -108,7 +153,7 @@ Or via UI: Repo → Projects → New project.
 gh project link <project-number> --repo owner/repo
 ```
 
-Example: `gh project link 1 --repo dustintaylored/sourceapp`
+Example: `gh project link 1 --repo owner/repo` (replace owner/repo with your repo)
 
 The Project then appears at `https://github.com/owner/repo/projects`. Agents derive this URL from the repo.
 
@@ -118,13 +163,13 @@ Create all labels in the Label List above (21 labels including `coordination:rep
 
 ### Step 3b: Create Project field (repo identifier)
 
-Add a **Project** field so items are identifiable by repo. Use the project slug from PROJECT_IDENTITY (e.g. `sourceapp`).
+Add a **Project** field so items are identifiable by repo. Use the project slug from PROJECT_IDENTITY.
 
 ```bash
-gh project field-create <project-number> --owner @me --name "Project" --data-type SINGLE_SELECT --single-select-options "<project-slug>"
+gh project field-create <project-number> --owner <repo-owner> --name "Project" --data-type SINGLE_SELECT --single-select-options "<project-slug>"
 ```
 
-Example: `gh project field-create 1 --owner @me --name "Project" --data-type SINGLE_SELECT --single-select-options "sourceapp"`
+Example: `gh project field-create 1 --owner owner --name "Project" --data-type SINGLE_SELECT --single-select-options "project-slug"`
 
 **Note:** `Repo` is a reserved name; use `Project` instead. When creating items, set this field to the project slug so humans can filter and identify items across multiple coordination projects.
 
@@ -149,14 +194,25 @@ Create a view for each row. In GitHub Projects: add view → set filter by label
 
 **How to create a view:** Project → Views → New view → Name it (e.g. "Directives") → Add filter: Label = `coordination:directive`.
 
-### Step 5: Update AI.md
+### Step 5: Record repo owner and Project URL in PROJECT_IDENTITY
+
+**Permanent record.** Add to `docs/01-orientation/PROJECT_IDENTITY.md`:
+
+| Field | Value |
+|-------|-------|
+| **Repo owner** | [owner from Step 1] |
+| **Project URL** | `https://github.com/[owner]/[repo]/projects` |
+
+Agents read these at session start. Do not change after adoption.
+
+### Step 6: Update AI.md (if needed)
 
 Replace the "Agent coordination" section with:
 
 ```markdown
 ## Agent coordination (first)
 
-Coordination lives in GitHub Project. Derive URL from repo: https://github.com/{owner}/{repo}/projects. If repo unclear, ask the user.
+Coordination lives in GitHub Project. Read Project URL and repo owner from PROJECT_IDENTITY (established during adoption).
 
 - **Session start:** Open Project → Directives view. Read items. Follow instructions for your role (by label).
 - **Assignee:** Always the active user. Use labels for role routing (agent:backend, etc.).
@@ -164,7 +220,7 @@ Coordination lives in GitHub Project. Derive URL from repo: https://github.com/{
 - **Check-out:** Optional. Create item in Active Work view; check-in = close.
 ```
 
-### Step 6: Deprecate docs/08-status/agent-coordination/
+### Step 7: Deprecate docs/08-status/agent-coordination/
 
 Keep a minimal README: "Coordination lives in GitHub. See [Setup Guide](../../07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md)."
 
@@ -190,8 +246,8 @@ When work in Projects or Discussions becomes **stable, canonical, or decided**, 
 
 ### Session start
 
-1. Derive Project URL from repo (`/projects`); ask user if unclear
-2. Verify the project is for this workspace's repo. Do not use `gh project list` without a repo filter
+1. Read Project URL and repo owner from [PROJECT_IDENTITY](../01-orientation/PROJECT_IDENTITY.md) (established during adoption)
+2. If current user ≠ repo owner, notify. Verify the project is for this workspace's repo. Do not use `gh project list` without a repo filter
 3. Open Directives view; read items. Filter by **Project** field = project slug when applicable
 4. Check items with labels matching your role (e.g. `agent:backend`). Filter by **Project** field when applicable
 5. Respond to open items; set Status to Resolved
@@ -200,7 +256,7 @@ When work in Projects or Discussions becomes **stable, canonical, or decided**, 
 
 - Create Project item in Directives view
 - Label: `coordination:directive`, plus role labels (e.g. `agent:backend`)
-- Set **Project** field to project slug (e.g. `sourceapp`)
+- Set **Project** field to project slug (from PROJECT_IDENTITY)
 - Assign to user(s) as needed
 
 ### Question for another agent
@@ -248,7 +304,15 @@ When work in Projects or Discussions becomes **stable, canonical, or decided**, 
 
 **gh project: permission denied** — Use fine-grained token with Projects: Read and write.
 
+**Cannot create under repo owner** — See [Permission fallback](#step-1-derive-repo-owner-and-create-github-project) in Step 1. Owner must create and grant access, or create under your account.
+
 **Project not visible** — Ensure Project is linked to repo: `gh project link <n> --repo owner/repo`.
+
+**Current user ≠ repo owner, no access** — Ask repo owner to:
+1. Create Agent Coordination project
+2. Link to repo
+3. Grant you access (Project → Settings → Manage access)
+4. Share project number/URL for PROJECT_IDENTITY
 
 **Repo unclear** — Ask the user which repo this project uses.
 

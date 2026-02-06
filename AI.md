@@ -2,9 +2,9 @@
 
 ## If you are in a worktree — redirect
 
-**MAIN_REPO_PATH:** `~/Github/project_sourceapp/sourceapp`
+**MAIN_REPO_PATH:** `(fill per project — set during adoption in docs/01-orientation/PROJECT_IDENTITY.md)`
 
-If your workspace root is not that path, you are in a worktree. **AI.md and the docs hierarchy are read and updated only in the main repo.** Code changes: stay in your worktree. **Coordination** lives in GitHub Project (external); derive URL from repo. For AI.md and docs: use the main repo path above.
+If your workspace root is not that path, you are in a worktree. **AI.md and the docs hierarchy are read and updated only in the main repo.** Code changes: stay in your worktree. **Coordination** lives in GitHub Project (external); derive URL from repo. For AI.md and docs: use the main repo path from PROJECT_IDENTITY.
 
 ---
 
@@ -16,13 +16,15 @@ Behave like a senior engineer onboarding to an existing system. Read before acti
 
 **Read the informative docs first.** Then go to Project to take action.
 
-- **Session start:** Check all worktrees for uncommitted changes; commit any before continuing. Then read [AGENT_COORDINATION_QUICK_START](docs/08-status/agent-coordination/AGENT_COORDINATION_QUICK_START.md). Follow its instructions. Then open Project → Directives view; read items; follow instructions for your role (by label).
+- **Session start:** Check all worktrees for uncommitted changes; commit any before continuing. Then read [AGENT_COORDINATION_QUICK_START](docs/08-status/agent-coordination/AGENT_COORDINATION_QUICK_START.md). Follow its instructions.
+- **Repo owner and Project URL:** Read from [PROJECT_IDENTITY](docs/01-orientation/PROJECT_IDENTITY.md). These are **established during adoption** and are permanent. Do not infer at session start.
+- **Owner vs current user:** Run `gh api user --jq .login` for current user. If **repo owner ≠ current user**, notify: "Repo owner is [owner]; you are [current_user]. Project items live under [owner]'s account." Test access with `gh project list --owner [owner]`. If fails: "Cannot access [owner]'s projects. Contact [owner] to grant access to the Agent Coordination project."
 - **Safeguard:** Only create or update Project items in the project for this workspace's repo. Derive repo from `git remote`; if unclear, ask. Do not use `gh project list` without a repo filter.
 - **Assignee:** Always the active user. Use labels for role routing (`agent:backend`, `agent:web`, etc.).
 - **Questions for another agent:** Create Project item with label `coordination:q-a`; add role label; assign to user. See [AGENT_COORDINATION_LOG](docs/08-status/agent-coordination/AGENT_COORDINATION_LOG.md) for format.
 - **Check-out:** Optional. Create item in Active Work view; check-in = close.
 
-**If Project does not exist yet:** Tell the user to run [GitHub Coordination Setup Guide](docs/07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md) and [New Project Repo Setup SOP](docs/06-operations/processes/NEW_PROJECT_REPO_SETUP_SOP.md). Until then, use docs mode per [Active Work SOP](docs/06-operations/coordination/ACTIVE_WORK_SOP.md) for check-out.
+**If Project does not exist yet:** Project and repo owner should be established during adoption (see [INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP](docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md) Step 5). Tell the user to run adoption or [GitHub Coordination Setup Guide](docs/07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md), then record repo owner and Project URL in PROJECT_IDENTITY. Until Project exists, use docs mode per [Active Work SOP](docs/06-operations/coordination/ACTIVE_WORK_SOP.md) for check-out.
 
 **Agent capabilities:** All agents have API access via `gh` CLI and env vars. Use them — do not defer to docs when you can act. GitHub (repos, issues, Projects), GitHub Project (items, views), Render (services, deploys), SendGrid (email) are reachable. Create Project items, run `gh` commands, call Render API when the task requires it.
 
@@ -50,9 +52,9 @@ Full process pointers: [docs/README Process and behavior (reference)](docs/READM
 
 ## Navigation
 
-**Hub:** `[MAIN_REPO_PATH]/docs/README.md`. Choose your path — pick the layer (structural) or use the direct link (faster). Both lead to docs in the hierarchy; no orphans.
+**Hub:** `{MAIN_REPO_PATH}/docs/README.md`. Choose your path — pick the layer (structural) or use the direct link (faster). Both lead to docs in the hierarchy; no orphans. MAIN_REPO_PATH comes from PROJECT_IDENTITY.
 
-**Extended rules:** `[MAIN_REPO_PATH]/docs/02-canon/GUIDELINES.md`
+**Extended rules:** `{MAIN_REPO_PATH}/docs/02-canon/GUIDELINES.md`
 
 ---
 

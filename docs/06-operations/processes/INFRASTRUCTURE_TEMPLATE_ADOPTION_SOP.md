@@ -96,6 +96,8 @@ cp "$ORIGIN_PROJECT/docs/06-operations/coordination/"*.md "$TARGET/docs/06-opera
 | **Project name** | docs/01-orientation/PROJECT_IDENTITY.md | Set to target project name |
 | **Project slug** | docs/01-orientation/PROJECT_IDENTITY.md | Set to target project slug (e.g. `cheqpass`) |
 | **Repository role** | docs/01-orientation/PROJECT_IDENTITY.md | Set to target repo role (client/service/worker) |
+| **Repo owner** | docs/01-orientation/PROJECT_IDENTITY.md | Set to GitHub repo owner (from `gh repo view --json owner -q .owner.login`). **Permanent** — agent coordination uses this account's Projects. |
+| **Project URL** | docs/01-orientation/PROJECT_IDENTITY.md | Set to `https://github.com/[owner]/[repo]/projects` |
 
 **Example:**
 ```markdown
@@ -128,15 +130,81 @@ cp "$ORIGIN_PROJECT/docs/06-operations/coordination/"*.md "$TARGET/docs/06-opera
 
 ---
 
-### Step 5: GitHub Coordination Setup
+### Step 5: GitHub Coordination Setup (establish owner permanently)
 
-**If target does not have GitHub Project "Agent Coordination":**
+**Establish repo owner's Project during adoption.** This designation is **permanent** — recorded in PROJECT_IDENTITY; agents read it at session start.
 
-- [ ] Run [GitHub Coordination Setup Guide](../../07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md)
-- [ ] Create Project, link to repo, create labels, configure views
-- [ ] Verify with checklist in the guide
+#### 5.1: Derive repo owner and check permissions
 
-**If target already has a Project:** Ensure it matches the guide (labels, views). Add missing labels/views if needed.
+```bash
+cd /path/to/target-project
+# Get repo owner
+OWNER=$(gh repo view --json owner -q .owner.login)
+CURRENT_USER=$(gh api user --jq .login)
+
+echo "Repo owner: $OWNER"
+echo "Current user: $CURRENT_USER"
+```
+
+**Permission check:**
+
+- **If current user = repo owner:** Proceed with `--owner @me`
+- **If current user ≠ repo owner:** Test if you can create under owner:
+  ```bash
+  gh project list --owner "$OWNER" || echo "Cannot access $OWNER's projects"
+  ```
+  - **If accessible:** Try `gh project create --owner "$OWNER"` (may require org membership)
+  - **If not accessible or creation fails:** See [Permission fallback](#permission-fallback-when-current-user-≠-owner) below
+
+#### 5.2: Create and link Project
+
+**If you have permission:**
+
+```bash
+# Create (use $OWNER if accessible; @me if owner == current user)
+gh project create --owner "$OWNER" --title "Agent Coordination"
+# Returns: project number (record it)
+
+# Link to repo
+gh project link [n] --repo "$OWNER/[repo]"
+```
+
+**Record the project number** for Step 5.4.
+
+#### 5.3: Create labels, field, and views
+
+Per [GitHub Coordination Setup Guide](../../07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md):
+- Create 21 labels
+- Create Project field (single-select with project slug)
+- Create 8 views (Directives, Active Work, Feature Requests, etc.)
+
+#### 5.4: Record in PROJECT_IDENTITY
+
+Add to `docs/01-orientation/PROJECT_IDENTITY.md` (GitHub coordination section):
+
+| Field | Value |
+|-------|-------|
+| **Repo owner** | [owner from Step 5.1] |
+| **Project URL** | `https://github.com/[owner]/[repo]/projects` |
+
+**Permanent.** Do not change after adoption.
+
+#### Permission fallback (when current user ≠ owner)
+
+**If you cannot create projects under the repo owner:**
+
+1. **Ask the repo owner to:**
+   - Create "Agent Coordination" project: `gh project create --owner @me --title "Agent Coordination"`
+   - Link to repo: `gh project link [n] --repo [owner/repo]`
+   - Run Steps 5.3 (labels, field, views)
+   - Grant you access: Project → Settings → Manage access → Add collaborator
+   - Share project number/URL
+
+2. **Alternative (less ideal):** Create under your account with `--owner @me`. Record in PROJECT_IDENTITY that Project is under your account, not the repo owner. Notify when handing off to others.
+
+3. **Record in PROJECT_IDENTITY:** Note who owns the Project. If different from repo owner, add comment: "Project under [user], not repo owner [owner]."
+
+**If target already has a Project:** Verify owner, link, labels, views; record repo owner and Project URL in PROJECT_IDENTITY.
 
 ---
 
@@ -147,7 +215,7 @@ cp "$ORIGIN_PROJECT/docs/06-operations/coordination/"*.md "$TARGET/docs/06-opera
 - [ ] [COORDINATION_MODEL](../../01-orientation/COORDINATION_MODEL.md) has Static vs Dynamic section; docs/README links to it
 - [ ] AI.md has coordination section, feature-request-first rule (Before making changes + Hard rules), and correct MAIN_REPO_PATH
 - [ ] docs/README.md exists and links to all layers
-- [ ] docs/01-orientation/PROJECT_IDENTITY.md has correct name, slug, role
+- [ ] docs/01-orientation/PROJECT_IDENTITY.md has correct name, slug, role, **repo owner**, and Project URL
 - [ ] docs/06-operations/coordination/ has AGENT_COORDINATION_SOP, ACTIVE_WORK_SOP, AGENT_SESSION_HOOK_SOP
 - [ ] docs/07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md present
 - [ ] .cursor/rules/read-ai-md-first.mdc present

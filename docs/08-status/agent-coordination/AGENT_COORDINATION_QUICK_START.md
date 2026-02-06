@@ -13,10 +13,16 @@ You **manage** all role tasks. You **delegate** implementation; you do not imple
 0. **Worktree hygiene** — Run `git worktree list`; for each worktree, run `git status`. Commit any uncommitted changes before continuing.
 1. **Read AI.md** at MAIN_REPO_PATH (workspace root).
 2. **Read** [AGENT_DIRECTIVES](AGENT_DIRECTIVES.md) — What directives are, where they live.
-3. **Open** GitHub Project. Derive URL from repo: `https://github.com/{owner}/{repo}/projects`. If repo unclear, ask the user.
-4. **Directives view** — Read **all** directives. For each targeting a role (agent:backend, agent:web, agent:webapp, agent:mobile): **delegate** — create Project item with the task, invoke subagent with that item. For Architect or "All agents": respond directly.
-5. **Q&A view** — Respond to items with label `coordination:q-a` where you are target. Add comment; set Status to Resolved.
-6. **Delegate implementation** — All implementation work flows through you: create Project item first, then invoke subagent (`/backend`, `/web`, `/webapp`, `/mobile`) with the item reference. See [AGENT_PROMPTS](AGENT_PROMPTS.md) and `~/.cursor/agents/architect.md` for invocation format.
+3. **Read repo owner and Project URL** — From [PROJECT_IDENTITY](../../01-orientation/PROJECT_IDENTITY.md). Established during adoption; permanent.
+4. **Owner check and access test:**
+   - Get current user: `gh api user --jq .login`
+   - If current user ≠ repo owner, notify: "Repo owner is [owner]; you are [current_user]. Project items live under [owner]'s account."
+   - Test access: `gh project list --owner [owner]` or try to view a Project item
+   - If access fails: "Cannot access [owner]'s projects. Contact [owner] to grant access to the Agent Coordination project."
+5. **Open** GitHub Project. If Project does not exist, adoption was incomplete — tell user to run [INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP](../../06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md) Step 5 or [GitHub Coordination Setup Guide](../../07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md), then record repo owner and Project URL in PROJECT_IDENTITY.
+6. **Directives view** — Read **all** directives. For each targeting a role (agent:backend, agent:web, agent:webapp, agent:mobile): **delegate** — create Project item with the task, invoke subagent with that item. For Architect or "All agents": respond directly.
+7. **Q&A view** — Respond to items with label `coordination:q-a` where you are target. Add comment; set Status to Resolved.
+8. **Delegate implementation** — All implementation work flows through you: create Project item first, then invoke subagent. Task tool if available; otherwise provide [manual subagent prompt](../../06-operations/coordination/AGENT_COORDINATION_SOP.md#manual-subagent-invocation-when-task-tool-unavailable). See [AGENT_PROMPTS](AGENT_PROMPTS.md) and `.cursor/agents/architect.md`.
 
 ---
 

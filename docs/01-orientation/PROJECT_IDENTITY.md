@@ -19,9 +19,20 @@
 |-------|--------|-----|
 | **MAIN_REPO_PATH** | [Absolute path to project root, e.g. /Users/you/Github/my-project] | Set in AI.md and here. Agents use it for worktree redirects and doc paths. See [New Project Repo Setup SOP](../06-operations/processes/NEW_PROJECT_REPO_SETUP_SOP.md). |
 
+## GitHub coordination (set during adoption)
+
+| Field | Value | Use |
+|-------|--------|-----|
+| **Repo owner** | [GitHub username or org, e.g. acme or acme-org] | Owner of the GitHub repo. Agent coordination uses this account's Projects. Set during adoption; do not change. |
+| **Project URL** | `https://github.com/[owner]/[repo]/projects` | Canonical coordination Project. Derived from owner + repo; record here during adoption. |
+
+**Set during adoption:** These values are established permanently when adopting origin_project. Agents read them at session start; they are not inferred. If the current user differs from repo owner, agents notify.
+
 **Example:**
-- Project name: SourceApp
-- Project slug: sourceapp
+- Project name: Acme
+- Project slug: acme
+- Repo owner: acme-org
+- Project URL: https://github.com/acme-org/acme/projects
 
 ---
 
@@ -50,8 +61,8 @@
 **Example:**
 | Relation | Repository | Notes |
 |----------|------------|-------|
-| **Source (read-only)** | gop_app | Original app for migration reference |
-| **This repo** | sourceapp | Migration target and documentation |
+| **Source (read-only)** | source-app | Original app for migration reference |
+| **This repo** | acme | Migration target and documentation |
 
 ---
 
@@ -101,8 +112,9 @@ See [Bootstrap New Project](BOOTSTRAP_NEW_PROJECT.md) for complete instructions.
 3. Update this file (PROJECT_IDENTITY.md) with new project info
 4. Fill layers 2-5 with new project content
 5. Reset layer 8 status (clear contents, keep structure)
-6. Run [GitHub Coordination Setup Guide](../07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md)
-7. Leave infrastructure unchanged (layers 6-7, AI.md, docs/README.md)
+6. Run [GitHub Coordination Setup Guide](../07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md) — create Project under repo owner, link, labels
+7. **Record repo owner and Project URL** in this file (GitHub coordination section). Permanent; do not change after adoption.
+8. Leave infrastructure unchanged (layers 6-7, AI.md, docs/README.md)
 
 ---
 
