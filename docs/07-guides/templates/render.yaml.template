@@ -1,0 +1,71 @@
+# Render standard setup — project-agnostic template
+# Copy this file to the repo root as render.yaml
+# Replace every "myproject" with the project slug from docs/01-orientation/PROJECT_IDENTITY.md
+#
+# Static web: Default is Vite/React SPA at repo root (clean install + build → dist/).
+# For Flutter web or other stacks, change buildCommand and staticPublishPath.
+
+services:
+  - type: web
+    name: myproject-web
+    runtime: static
+    buildCommand: rm -rf node_modules package-lock.json && npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_BASE_URL
+        sync: false
+  - type: web
+    name: myproject-api
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm run start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: myproject-db
+          property: connectionString
+      - key: SESSION_SIGNING_KEY
+        sync: false
+      - key: SENDGRID_API_KEY
+        sync: false
+      - key: SENDGRID_FROM_EMAIL
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: ALLOW_LOCALHOST_ORIGINS
+        sync: false
+      - key: APP_BUNDLE_ID
+        sync: false
+      - key: ANDROID_PACKAGE_NAME
+        sync: false
+      - key: APPLE_TEAM_ID
+        sync: false
+  - type: worker
+    name: myproject-worker
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm run start:worker
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: myproject-db
+          property: connectionString
+      - key: SENDGRID_API_KEY
+        sync: false
+      - key: SENDGRID_FROM_EMAIL
+        sync: false
+
+databases:
+  - name: myproject-db
+    plan: basic-1gb
