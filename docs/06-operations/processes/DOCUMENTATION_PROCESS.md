@@ -30,7 +30,7 @@ Working Checklist (per feature/PR)
 When Adding New Project-Agnostic Documentation
 - When you add a new project-agnostic SOP, process, or infrastructure doc (e.g. new `*_SOP.md` in Layer 6, new `INFRASTRUCTURE_*.md` in Layer 7):
   1. **Add to CORE_INFRASTRUCTURE_INVENTORY** — `docs/01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md` (path, purpose, reusability).
-  2. **Sync to blank** — Follow `docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md`: copy file to `~/Github/blank/[same-path]`, log in `~/Github/blank/INFRASTRUCTURE_VERSION_LOG.md`.
+  2. **Sync to origin_project** — Follow `docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md`: copy file to `~/Github/origin_project/[same-path]`, log in `~/Github/origin_project/INFRASTRUCTURE_VERSION_LOG.md`.
   3. **Link in docs/README.md** — Ensure the new doc is linked in the correct layer (and in `docs/06-operations/README.md` if under Layer 6).
 - Do this immediately; do not defer to the monthly audit. See **AI.md** “Infrastructure Template Maintenance.”
 

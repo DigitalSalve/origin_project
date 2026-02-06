@@ -2,7 +2,7 @@
 
 **Purpose:** Track all updates to the blank infrastructure template. Append new entries when infrastructure is synced or improved.
 
-**Location:** `~/Github/blank/INFRASTRUCTURE_VERSION_LOG.md`
+**Location:** `~/Github/origin_project/INFRASTRUCTURE_VERSION_LOG.md`
 
 ---
 
@@ -85,3 +85,5 @@
 **Next audit due:** 2026-02-28 (monthly)
 | 2026-02-05 | .cursor/agents/, .cursor/rules/architect-coordination.mdc | Critical Sync | Verified working subagent definitions from sourceapp after Max Mode validation. Updated all 5 agent files (architect, backend, web, webapp, mobile) and architect-coordination rule. These now support Task tool invocation in Max Mode with parallel/sequential delegation. | 1.0 |
 | 2026-02-05 | Agent Management SOPs (3 new files) | New Infrastructure | Created AGENT_CUSTOMIZATION_SOP (customize generic agents with project context), CUSTOM_AGENT_CREATION_SOP (create domain-specific agents), AGENT_TESTING_VALIDATION_SOP (test and validate agent functionality). Enables new projects to adopt and customize working agent system. | 1.0 |
+| 2026-02-06 | Q&A Coordination Pattern | Process Update | Documented two-phase Q&A pattern: subagent asks → Architect responds → subagent re-invoked to acknowledge/close. Prevents premature closure by Architect. Added QA_DIRECTIVE_TEMPLATE, updated AGENT_COORDINATION_SOP and architect.md. | 1.0 |
+| 2026-02-06 | Q&A Coordination Two-Phase Pattern | Process Update | Added two-phase Q&A pattern: subagent asks → Architect responds → subagent re-invoked to acknowledge/close. Created QA_DIRECTIVE_TEMPLATE, updated AGENT_COORDINATION_SOP and architect.md. Prevents premature closure by Architect. | 1.0 |

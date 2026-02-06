@@ -12,11 +12,11 @@
 
 **Adoption** = applying blank to an existing project. Unlike bootstrap (new project from scratch), adoption requires:
 
-1. **Copy infrastructure** from blank into the target project
+1. **Copy infrastructure** from origin_project into the target project
 2. **Merge, not replace** — preserve existing project-specific content where it exists
 3. **Adapt placeholders** — MAIN_REPO_PATH, PROJECT_IDENTITY, project slug
 4. **Add missing structure** — create folders/files that don't exist
-5. **Set up GitHub coordination** — if not already present. If target has docs-based coordination (ACTIVE_WORK, feature-requests, reports in docs), run [Migration Plan](../../08-status/GITHUB_COORDINATION_MIGRATION_PLAN.md) after adoption.
+5. **Set up GitHub coordination** — if not already present. If target has docs-based coordination (ACTIVE_WORK, feature-requests, reports in docs), update SOPs and status docs to reference Project per [Coordination Model](../../01-orientation/COORDINATION_MODEL.md).
 
 **Use this SOP when:** An architect or agent is instructed to "update [project] infrastructure based on blank" or "adopt blank into [project]."
 
@@ -26,9 +26,9 @@
 
 ## Prerequisites
 
-- **Blank template path:** `~/Github/blank/` (or equivalent)
+- **Blank template path:** `~/Github/origin_project/` (or equivalent)
 - **Target project path:** Absolute path to the existing project root (e.g. `~/Github/cheqpass/`)
-- **CORE_INFRASTRUCTURE_INVENTORY.md** — Defines what to copy (read from blank)
+- **CORE_INFRASTRUCTURE_INVENTORY.md** — Defines what to copy (read from origin_project)
 
 ---
 
@@ -49,7 +49,7 @@
 
 ### Step 2: Copy Infrastructure Files
 
-**Copy from blank to target.** Use [CORE_INFRASTRUCTURE_INVENTORY](../../01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md) as the source of truth for what qualifies as infrastructure.
+**Copy from origin_project to target.** Use [CORE_INFRASTRUCTURE_INVENTORY](../../01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md) as the source of truth for what qualifies as infrastructure.
 
 **For each infrastructure path:**
 
@@ -61,7 +61,7 @@
 
 **Copy command pattern:**
 ```bash
-BLANK=~/Github/blank
+BLANK=~/Github/origin_project
 TARGET=/path/to/target-project
 
 # Example: copy AI.md if target doesn't have it or has outdated coordination
@@ -114,7 +114,7 @@ cp "$BLANK/docs/06-operations/coordination/"*.md "$TARGET/docs/06-operations/coo
 **When target has content that blank would overwrite:**
 
 1. **AI.md** — Blank has coordination section and feature-request-first rule. If target has AI.md:
-   - Add or update the coordination section from blank
+   - Add or update the coordination section from origin_project
    - Ensure "Before making changes" includes: create feature request before implementing new behavior
    - Ensure "Hard rules" includes: do not implement new behavior without a feature request first
    - Preserve target's project-specific hard rules and behavior
@@ -133,11 +133,10 @@ cp "$BLANK/docs/06-operations/coordination/"*.md "$TARGET/docs/06-operations/coo
 **If target does not have GitHub Project "Agent Coordination":**
 
 - [ ] Run [GitHub Coordination Setup Guide](../../07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md)
-- [ ] Create Project, link to repo, create labels, **create Project field** (Step 3b), configure views
-- [ ] Add **Project** field as a column in views (Configure → enable Project field)
+- [ ] Create Project, link to repo, create labels, configure views
 - [ ] Verify with checklist in the guide
 
-**If target already has a Project:** Ensure it matches the guide (labels, views, **Project field with project slug**). Add missing labels/views/field if needed.
+**If target already has a Project:** Ensure it matches the guide (labels, views). Add missing labels/views if needed.
 
 ---
 
@@ -161,12 +160,12 @@ cp "$BLANK/docs/06-operations/coordination/"*.md "$TARGET/docs/06-operations/coo
 
 **When instructing an agent to adopt blank into a project, provide:**
 
-1. **Blank path:** `~/Github/blank/` (or `@~/Github/blank/`)
+1. **Blank path:** `~/Github/origin_project/` (or `@~/Github/blank/`)
 2. **Target path:** Absolute path to the project (e.g. cheqpass)
 3. **Explicit instruction:** "Adopt the blank infrastructure into [project]. Follow [INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP](docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md). Preserve existing project-specific content. Set MAIN_REPO_PATH and PROJECT_IDENTITY for [project]."
 
 **Example prompt:**
-> Update cheqpass's coordination infrastructure to match the blank template at `~/Github/blank/`. Follow the Infrastructure Template Adoption SOP. Copy infrastructure files, merge where target has existing content, set MAIN_REPO_PATH and PROJECT_IDENTITY for cheqpass. Do not overwrite cheqpass-specific canon, architecture, or behavior docs.
+> Update cheqpass's coordination infrastructure to match the origin_project template at `~/Github/origin_project/`. Follow the Infrastructure Template Adoption SOP. Copy infrastructure files, merge where target has existing content, set MAIN_REPO_PATH and PROJECT_IDENTITY for cheqpass. Do not overwrite cheqpass-specific canon, architecture, or behavior docs.
 
 ---
 

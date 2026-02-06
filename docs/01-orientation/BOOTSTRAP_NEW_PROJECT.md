@@ -30,7 +30,7 @@ Use when this repo is your single source of truth for both infrastructure and on
    - **PROJECT_IDENTITY:** Overwrite `docs/01-orientation/PROJECT_IDENTITY.md` with the new project’s name, slug, repository role, and infrastructure vs project-specific section (you can keep the section structure and change only the tables).
    - **Layers 2–5:** Replace or clear `docs/02-canon/`, `docs/03-architecture/`, `docs/04-behavior/`, `docs/05-integrations/` with the new project’s canon, architecture, behavior, and integrations. Delete SourceApp-specific files; add or overwrite with Project B’s content. Standard file names (e.g. SYSTEM_MAP.md, AUTHENTICATION_FLOWS.md) are in `docs/README.md` and `docs/CHATGPT_PROJECT_DOCUMENTATION_LIST.md`.
    - **Legal/content:** Replace `docs/06-operations/legal/` and `docs/06-operations/content/` **contents** with Project B’s legal docs and copy. Folder structure and READMEs stay.
-   - **08-status contents:** Clear or replace `docs/08-status/` **contents** (reports, logs, examination outputs, qa). Feature requests live in GitHub Project, not docs. Replace with Project B’s status. Keep folder structure and READMEs; reset ACTIVE_WORK.md / ACTIVE_WORK_LOG.md / INTEGRITY_CHECK_LOG.md / IMPLEMENTATION_VERIFICATION.md to empty/minimal per their formats.
+   - **08-status contents:** Clear or replace `docs/08-status/` **contents** (feature-requests, reports, logs, examination outputs, qa) with Project B’s status. Keep folder structure and READMEs; reset ACTIVE_WORK.md / ACTIVE_WORK_LOG.md / INTEGRITY_CHECK_LOG.md / IMPLEMENTATION_VERIFICATION.md to empty/minimal per their formats.
 
 3. **Set up GitHub coordination** (required for agent coordination):
    - Run [New Project Repo Setup SOP](../06-operations/processes/NEW_PROJECT_REPO_SETUP_SOP.md) for repo creation and MAIN_REPO_PATH
@@ -56,7 +56,7 @@ Use when you want a **clean template** that has **only** infrastructure + placeh
    - All **infrastructure** paths (see [Explicit path list](#explicit-path-list) below).
    - **PROJECT_IDENTITY template:** `docs/01-orientation/PROJECT_IDENTITY.md` with generic placeholders (e.g. “Project name”, “project-slug”, “Repository role”, “Related repositories”) and the standard “Infrastructure vs project-specific” and “Applying this structure” sections.
    - **Optional placeholders for 02–05:** Empty or minimal `docs/02-canon/`, `docs/03-architecture/`, `docs/04-behavior/`, `docs/05-integrations/` with the **file names** your projects use (e.g. GUIDELINES.md, SYSTEM_MAP.md, AUTHENTICATION_FLOWS.md) and one-line “Fill per project” content, so every new project already has the right files to edit.
-   - **Optional 08-status placeholders:** Empty ACTIVE_WORK, ACTIVE_WORK_LOG, INTEGRITY_CHECK_LOG, IMPLEMENTATION_VERIFICATION, plus folder structure and READMEs for screen-examination, backend-examination, user-flows, reports, qa. Feature requests → GitHub Project.
+   - **Optional 08-status placeholders:** Empty ACTIVE_WORK, ACTIVE_WORK_LOG, INTEGRITY_CHECK_LOG, IMPLEMENTATION_VERIFICATION, plus folder structure and READMEs for feature-requests, screen-examination, backend-examination, user-flows, reports, qa.
 
 2. **To start a new project:** Clone the template repo (e.g. `git clone <template-repo-url> <new-project-name>`). No wiping—you’re cloning a repo that has no project-specific content.
 
@@ -81,22 +81,15 @@ Copy these into a new project unchanged (except PROJECT_IDENTITY in Workflow 1, 
 | Path | Notes |
 |------|--------|
 | `AI.md` | Root AI guide |
-| `ADOPTION.md` | One-liner adoption prompt for architect |
 | `docs/README.md` | Navigation spine |
-| `docs/01-orientation/COORDINATION_MODEL.md` | What lives in GitHub Project vs docs; full flow and reasoning |
-| `docs/01-orientation/PROJECT_DOCUMENTATION_HIERARCHY.md` | What the hierarchy is, why it exists, how it works |
-| `docs/01-orientation/GLOBAL_AI_AGENT_RULES.md` | Project-agnostic AI agent rules; optimized for context consumption |
 | `docs/01-orientation/GETTING_STARTED.md` | How to use the structure |
-| `docs/02-canon/GUIDELINES.md` | Project-agnostic AI behavior and documentation expectations |
 | `docs/01-orientation/BOOTSTRAP_NEW_PROJECT.md` | This file |
 | `docs/06-operations/` | Entire tree (processes, examination, coordination, usage, conventions, management, legal/content **folders** and READMEs; legal/content **file contents** are project-specific—see below) |
 | `docs/07-guides/templates/` | Entire tree |
 | `docs/07-guides/INFRASTRUCTURE_AUTHENTICATION_CORE_FLOW.md` | Recurring auth flow (core infra) |
 | `docs/07-guides/INFRASTRUCTURE_RENDER_STANDARD_SETUP.md` | Standard Render setup (core infra) |
-| `docs/07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md` | GitHub Projects + Discussions setup for agent coordination (run when creating new project) |
 | `docs/07-guides/templates/render.yaml.template` | Render render.yaml template (core infra) |
-| `docs/06-operations/processes/NEW_PROJECT_REPO_SETUP_SOP.md` | Repo creation and MAIN_REPO_PATH setup |
-| `docs/08-status/` | **Structure only:** ACTIVE_WORK.md, ACTIVE_WORK_LOG.md, INTEGRITY_CHECK_LOG.md, IMPLEMENTATION_VERIFICATION.md (can use empty/minimal template), CURRENT_STATUS.md (minimal), folder layout and READMEs for screen-examination/, backend-examination/, user-flows/, reports/, qa/, scope-of-work/, agent-coordination/. Feature requests → GitHub Project. |
+| `docs/08-status/` | **Structure only:** ACTIVE_WORK.md, ACTIVE_WORK_LOG.md, INTEGRITY_CHECK_LOG.md, IMPLEMENTATION_VERIFICATION.md (can use empty/minimal template), CURRENT_STATUS.md (minimal), folder layout and READMEs for feature-requests/, screen-examination/, backend-examination/, user-flows/, reports/, qa/, scope-of-work/ |
 | `docs/CHATGPT_PROJECT_DOCUMENTATION_LIST.md` | Optional but useful |
 
 **Template repo:** Include the above. For PROJECT_IDENTITY, include a **template** version with placeholder name/slug/role and the standard “Infrastructure vs project-specific” and “Applying this structure” sections.
@@ -114,7 +107,7 @@ These paths **exist in every project** (same file names and layout) but **conten
 | `docs/05-integrations/` | All files—external APIs, webhooks, etc. |
 | `docs/06-operations/legal/` | **Contents** of files (e.g. COOKIE_POLICY.md). Folder + README are infrastructure |
 | `docs/06-operations/content/` | **Contents** of files. Folder + README are infrastructure |
-| Feature requests | Live in GitHub Project (label `coordination:feature-request`); not in docs (desync across worktrees) |
+| `docs/08-status/feature-requests/*` | Optional archive; feature requests live in GitHub Project |
 | `docs/08-status/screen-examination/*` | Report files (not the README) |
 | `docs/08-status/backend-examination/*` | Report files (not the README) |
 | `docs/08-status/user-flows/*` | Report files (not the README) |
@@ -141,7 +134,7 @@ Example (pseudocode):
 # 3. Copy docs/08-status/ structure and READMEs; write empty ACTIVE_WORK, ACTIVE_WORK_LOG, INTEGRITY_CHECK_LOG, IMPLEMENTATION_VERIFICATION, CURRENT_STATUS from templates
 # 4. Write docs/01-orientation/PROJECT_IDENTITY.md from template (with placeholder name/slug/role)
 # 5. Create empty docs/02-canon, 03-architecture, 04-behavior, 05-integrations (or copy placeholder files if you maintain them)
-# 6. Create empty docs/08-status/ screen-examination, backend-examination, user-flows, reports, qa with READMEs only. Feature requests → GitHub Project.
+# 6. Create empty docs/08-status/feature-requests (optional archive), screen-examination, backend-examination, user-flows, reports, qa with READMEs only
 ```
 
 The explicit path list above is the source of truth for what goes in step 2 (infrastructure) vs what is “empty placeholder” in steps 4–6 (project-specific slots).

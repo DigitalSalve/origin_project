@@ -2,7 +2,7 @@
 
 **Navigation spine for all project documentation.**
 
-This document routes you to the right documentation layer. **AI.md points here for everything about the docs spine:** required reading order, layer intents, discovery flow, and all process (feature requests, before making changes, gaps, scope, documentation completion, coordination, creating new docs, when to stop and ask, infrastructure template maintenance). Read layers in order (1–8) when onboarding; jump to specific layers when working on specific areas.
+This document routes you to the right documentation layer. Read layers in order (1–8) when onboarding. Jump to specific layers when working on specific areas.
 
 **Project identity:** This project’s name, slug, repository role, and the boundary between **infrastructure** (reusable) and **project-specific** content are defined in [Project Identity](01-orientation/PROJECT_IDENTITY.md). Use that document when referring to this project by name or when discerning what to keep vs replace when reusing this structure.
 - [Core Infrastructure Inventory](01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md) — **Complete catalog** of all reusable infrastructure files (~45 files): processes, SOPs, templates, infrastructure guides. Use when identifying what to copy to new projects vs what to replace with project-specific content.
@@ -88,8 +88,8 @@ Use this file as the single pointer for all docs-spine process. Details live in 
 - [Project Documentation Hierarchy](01-orientation/PROJECT_DOCUMENTATION_HIERARCHY.md) — **What it is, why it exists, how it works** — single explanation for humans and agents
 - [Global AI Agent Rules](01-orientation/GLOBAL_AI_AGENT_RULES.md) — Project-agnostic rules for all AI agents; optimized for context consumption
 - [Coordination Model](01-orientation/COORDINATION_MODEL.md) — **What lives where and why:** GitHub Project vs docs; worktree desync reasoning; full flow by artifact type; adoption and migration
-
 - [Project Identity](01-orientation/PROJECT_IDENTITY.md) — **Source of truth** for this project’s name, slug, repository role, and infrastructure vs project-specific boundary; use when referring to this project by name or when reusing the structure
+- [Application Stack Outline](01-orientation/APPLICATION_STACK_OUTLINE.md) — **Simple one-page** reference for the technology stack (React/Flutter/TypeScript/PostgreSQL/Render)
 - [Core Infrastructure Inventory](01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md) — **Complete catalog** of all reusable infrastructure files (~45 files): processes, SOPs, templates, infrastructure guides. Use when identifying what to copy to new projects vs what to replace with project-specific content.
 - [Bootstrap New Project](01-orientation/BOOTSTRAP_NEW_PROJECT.md) — How to take this infrastructure to a new project **without wiping** the source: copy-this-repo vs template-repo workflows, explicit path list for scripting or manual copy
 - [Getting Started Guide](01-orientation/GETTING_STARTED.md) — Setup and first steps
@@ -105,7 +105,9 @@ Use this file as the single pointer for all docs-spine process. Details live in 
 
 **These are mandates, not suggestions.** When applying this base to a project, fill this layer with project-specific canon.
 
-- [Layer 2 README](02-canon/README.md) — **Fill per project.** Add `GUIDELINES.md`, `PROJECT_SCOPE.md`, and other canon docs. Link them here when created.
+- [Guidelines](02-canon/GUIDELINES.md) — AI behavior rules and documentation expectations
+- [Project Scope](02-canon/PROJECT_SCOPE.md) — **Product boundaries** defining what is in-scope vs out-of-scope for SourceApp; authoritative source for scope decisions
+- **Fill per project:** e.g. `SYSTEM_CANON.md` (authoritative system truth), `AUDIT_SCOPE.md`, `CONSENT_AND_AUDIT.md` (or project equivalents). Add links here when created.
 
 ---
 
@@ -115,12 +117,12 @@ Use this file as the single pointer for all docs-spine process. Details live in 
 
 **When to read:** Understanding how the system is built, database structure, state machines
 
-- [Layer 3 README](03-architecture/README.md) — **Fill per project.** Add `SYSTEM_MAP.md`, `INTEGRATION_PLATFORMS.md`, and other architecture docs. Link them here when created.
+**General structure — fill with project data.** When applying this base to a project, create `docs/03-architecture/` and add (or adapt) docs such as:
 
-**Typical docs:**
-- `SYSTEM_MAP.md` — Quick index of how the system is wired
+- [System Map](03-architecture/SYSTEM_MAP.md) — Quick index of how the system is wired; member app API wiring status → [Current Status](08-status/CURRENT_STATUS.md) §2.2
 - [Integration Platforms](03-architecture/INTEGRATION_PLATFORMS.md) — Catalog of actively used and planned integration platforms (SendGrid, OpenAI, Render, AWS, Cloudflare, Plaid, etc.); settings and update procedures per [Integration Platforms Management SOP](06-operations/management/INTEGRATION_PLATFORMS_MANAGEMENT_SOP.md)
-- Database / entity relations and user flows
+- [SourceApp Database Schema](03-architecture/SOURCEAPP_DATABASE_SCHEMA.md) — SourceApp tables (users, events, news, deals, donations, etc.); source of truth: `backend/db/schema.ts`
+- [Database Relations and User Flows](03-architecture/DATABASE_RELATIONS_AND_USER_FLOWS.md) — Payment-platform schema (reference; not SourceApp)
 - State machine(s) for core flows
 - Funds or value flow (if applicable)
 - Admin access and support architecture
@@ -137,10 +139,15 @@ Add links here when created.
 **When to read:** Understanding how users interact with the system, UI flows, API endpoints
 
 **Behavior docs (source of truth for flows, wiring, and UI standards):**
-- [Layer 4 README](04-behavior/README.md) — **Fill per project.** Add behavior docs (e.g. AUTHENTICATION_FLOWS, API_MATRIX, INTENDED_USER_FLOWS). Link them here when created.
-- *Typical:* AUTHENTICATION_FLOWS.md, COOKIES_AND_SESSION.md, API_MATRIX.md, UI_INTEGRATION_POINTS.md, DESIGN_SYSTEM.md, INTENDED_USER_FLOWS.md (per User Flow Identification SOP)
+- [Authentication Flows](04-behavior/AUTHENTICATION_FLOWS.md) — Auth flows, sessions, roles, magic link, device scoping
 - [Cookies and Session](04-behavior/COOKIES_AND_SESSION.md) — Cookies used by sourceapp (`sourceapp_session`, `sourceapp_trusted_device`): how and when they’re used, attributes, env overrides; pointer to cookie policy (legal)
-**Usage SOPs** (when behavior docs exist):
+- [API Matrix](04-behavior/API_MATRIX.md) — Endpoint ⇄ UI integration map (Critical vs Secondary)
+- [UI Integration Points](04-behavior/UI_INTEGRATION_POINTS.md) — Route inventory, intended behavior, API touchpoints
+- [Design System](04-behavior/DESIGN_SYSTEM.md) — Colors, typography, components, layouts, role-based patterns
+- [Subscription Tiers](04-behavior/SUBSCRIPTION_TIERS.md) — Tiers, entitlements, implementation status, flow intersections
+- [Intended User Flows](04-behavior/INTENDED_USER_FLOWS.md) — Full intended experience across roles and entry points; created per User Flow Identification SOP and kept in sync with examinations/feature requests
+
+**Usage SOPs (how to use and maintain each behavior doc):**
 - [Authentication Flows — Usage SOP](06-operations/usage/AUTHENTICATION_FLOWS_USAGE_SOP.md)
 - [API Matrix — Usage SOP](06-operations/usage/API_MATRIX_USAGE_SOP.md)
 - [UI Integration Points — Usage SOP](06-operations/usage/UI_INTEGRATION_POINTS_USAGE_SOP.md)
@@ -155,9 +162,7 @@ Add links here when created.
 
 **When to read:** Integrating with external providers
 
-- [Layer 5 README](05-integrations/README.md) — **Fill per project.** Add integration docs. Link them here when created.
-
-**Typical docs:**
+**General structure — fill with project data.** When applying this base to a project, create `docs/05-integrations/` and add (or adapt) docs such as:
 
 - `INTEGRATION_REQUIREMENTS.md` — Backend implementation and API wiring
 - Provider-specific implementation docs (per external service)
@@ -172,38 +177,46 @@ Add links here when created.
 
 **Purpose:** Deployment, audits, archival, documentation process, migration process
 
-**When to read:** Deploying, updating documentation, managing lifecycle, screen examination, migrating from source (when applicable)
+**When to read:** Deploying, updating documentation, managing lifecycle, screen examination, **migrating from source (gop_app)**
 
 **Structure:** Operations are grouped in subfolders. See [06-operations/README.md](06-operations/README.md) for the index.
 
 - [Documentation Process](06-operations/processes/DOCUMENTATION_PROCESS.md) — How to keep docs in sync with code
-- [Migration Process](06-operations/processes/MIGRATION_PROCESS.md) — How migration from source to target is performed: source left read-only, all adaptation work in this project
+- [Migration Process](06-operations/processes/MIGRATION_PROCESS.md) — How migration from the original source (gop_app) is performed: source left read-only, all adaptation work in sourceapp
 - [Migration: Work in Isolation of Render](06-operations/processes/MIGRATION_LOCAL_PHASE.md) — Migration work that can be done without Render (local backend, DB, render.yaml, env template); use before or in parallel with connecting Render
+- [Database Migrations SOP](06-operations/processes/DATABASE_MIGRATIONS_SOP.md) — When and how to create database migrations, where they go (`backend/db/migrations/`), when they are applied (manual; not auto on deploy), and why; minimal, idempotent; never rewrite or delete existing migrations
 - [Scope of Work SOP](06-operations/processes/SCOPE_OF_WORK_SOP.md) — Create a Scope of Work from expected project requirements and define/work to complete them; project-agnostic culmination of planning (canon, architecture, behavior, examinations, feature requests); output: `08-status/scope-of-work/SCOPE_OF_WORK.md`
+- [Gap Identification SOP](06-operations/processes/GAP_IDENTIFICATION_SOP.md) — Systematic process for identifying and classifying feature gaps, infrastructure gaps, and scope gaps; scope gaps resolved in Project Scope
+- [Product Boundary Breach SOP](06-operations/processes/PRODUCT_BOUNDARY_BREACH_SOP.md) — **Before action:** Determine if an action breaches file set, feature scope, or repository boundaries; if breach detected, notify user and stop until explicit approval
 - [Infrastructure Template Sync SOP](06-operations/processes/INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md) — **Infrastructure maintenance.** How to sync infrastructure file updates from active projects to blank template (`~/Github/blank/`); ensures template stays current when infrastructure improves
 - [Infrastructure Template Audit SOP](06-operations/processes/INFRASTRUCTURE_TEMPLATE_AUDIT_SOP.md) — **Infrastructure maintenance.** How to audit blank template for drift and schedule syncs; run monthly to detect infrastructure improvements not yet in template
 - [Agent Customization SOP](06-operations/processes/AGENT_CUSTOMIZATION_SOP.md) — Customize generic agents with project-specific context (paths, domain, APIs, tech stack)
 - [Custom Agent Creation SOP](06-operations/processes/CUSTOM_AGENT_CREATION_SOP.md) — Create domain-specific or workflow-specific custom agents
 - [Agent Testing and Validation SOP](06-operations/processes/AGENT_TESTING_VALIDATION_SOP.md) — Test and validate agent functionality with Max Mode and Task tool
-- [Infrastructure Template Adoption SOP](06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md) — **Adopt blank into existing project.** Apply blank infrastructure to an existing project; copy infrastructure, merge vs replace, adapt MAIN_REPO_PATH and PROJECT_IDENTITY; use when instructing an architect/agent to adopt blank
 - [Active Work SOP](06-operations/coordination/ACTIVE_WORK_SOP.md) — Check-out/check-in of files and areas before and after work; format, conflict handling, archive policy for ACTIVE_WORK and ACTIVE_WORK_LOG
-- [06-operations/architecture/](06-operations/architecture/README.md) — **Project-specific.** Add architecture SOPs here (e.g. frontend-backend architecture). See [Infrastructure: Optimal Architecture](07-guides/INFRASTRUCTURE_OPTIMAL_FRONTEND_BACKEND_ARCHITECTURE.md) for reusable pattern.
+- [SourceApp Frontend-Backend Architecture SOP](06-operations/architecture/SOURCEAPP_FRONTEND_BACKEND_ARCHITECTURE_SOP.md) — **SourceApp-specific.** Implementation guide for optimal architecture: React/Next.js marketing site (SEO), Flutter application (web + mobile code sharing), TypeScript backend (type safety). Includes conversion steps, deep link configuration, deployment setup.
 - [Documentation Agent SOP](06-operations/coordination/DOCUMENTATION_AGENT_SOP.md) — **Pre-commit:** Ensure documentation is up to date before committing file changes; checklist for subsystem docs, System Map, feature notes, discoverability
 - [Screen Examination SOP](06-operations/examination/SCREEN_EXAMINATION_SOP.md) — Systematic process for examining screens to identify broken or stubbed content
 - [Backend Examination SOP](06-operations/examination/BACKEND_EXAMINATION_SOP.md) — Systematic process for examining the backend, identifying key components and processes, and creating a structured outline (working / not working / needing implementation)
 - [User Flow Identification SOP](06-operations/examination/USER_FLOW_IDENTIFICATION_SOP.md) — Identifying intended user flows across the entire site or app map and documenting the full intended experience; output is `docs/04-behavior/INTENDED_USER_FLOWS.md` (or equivalent) and optional dated reports in `08-status/user-flows/`
-- [Implementation Verification SOP](06-operations/coordination/IMPLEMENTATION_VERIFICATION_SOP.md) — Verifying implementation status, tracking open/resolved questions in IMPLEMENTATION_VERIFICATION.md, and ensuring gaps are tracked in Project feature-request items; procedure for when and how to run verification
+- [Implementation Verification SOP](06-operations/coordination/IMPLEMENTATION_VERIFICATION_SOP.md) — Verifying implementation status, tracking open/resolved questions in IMPLEMENTATION_VERIFICATION.md, ensuring gaps are tracked in Project items; **Step 6:** when updating CURRENT_STATUS, SOW deliverables, or Project items, record what was done, why, how verified, and when (comprehensive understanding for status tracking and future reference)
 - [File Naming Conventions](06-operations/conventions/FILE_NAMING_CONVENTIONS.md) — Unified file naming conventions for docs, reports, feature requests, templates, folders, and migrations
 - [Report Creation and Delivery SOP](06-operations/conventions/REPORT_CREATION_AND_DELIVERY_SOP.md) — How to create, place, log, and deliver reports; where reports go (SOP-owned folders vs. `08-status/reports/`); lifecycle for reports in `reports/`
 - [Integration Platforms Management SOP](06-operations/management/INTEGRATION_PLATFORMS_MANAGEMENT_SOP.md) — Managing integration-platform settings, update procedures, and adding or retiring platforms (add/change settings, upgrades, Layer 5 docs)
+- [Environment Variables Management SOP](06-operations/management/ENVIRONMENT_VARIABLES_MANAGEMENT_SOP.md) — Adding, removing, or changing env vars (Render dashboard, env groups, per-service; local .env); keep .env.example, README, render.yaml in sync; no secrets in repo
 - [Legal Documents SOP](06-operations/management/LEGAL_DOCUMENTS_SOP.md) — Managing the legal documents folder (terms of service, privacy policy, cookie policy, disclaimers); adding, updating, retiring
 - [Content Documents SOP](06-operations/management/CONTENT_DOCUMENTS_SOP.md) — Managing the content documents folder (homepage, landing, section copy); adding, updating, retiring
 - [Repo Integrity Check SOP](06-operations/coordination/REPO_INTEGRITY_CHECK_SOP.md) — Daily repo integrity check (spine, layers, links, operations–reports); run at least once per day; if [INTEGRITY_CHECK_LOG](08-status/INTEGRITY_CHECK_LOG.md) has no entry for today, run before the next operation
+- [Production Deployment Validation SOP](06-operations/coordination/PRODUCTION_DEPLOYMENT_VALIDATION_SOP.md) — Validate backend/worker start commands use only production dependencies; run before deploy when changing package.json scripts or render.yaml
+- [Manual Sync Trigger SOP](06-operations/coordination/MANUAL_SYNC_TRIGGER_SOP.md) — Request a manual sync (e.g. redeploy) by appending to [Manual Sync Log](08-status/MANUAL_SYNC_LOG.md); the repo change can force automatic syncs (e.g. deploy-on-push)
+- [Commit Changes SOP](06-operations/coordination/COMMIT_CHANGES_SOP.md) — Standard procedure for committing changes after work; pre-commit checks (Documentation Agent, backend validation), message format, when to push
+- [Operational Asset Creation and Reinforcement SOP](06-operations/coordination/OPERATIONAL_ASSET_CREATION_AND_REINFORCEMENT_SOP.md) — When creating new SOPs/operational assets: make discoverable, reinforce in AI.md so behavior is followed, commit per Commit Changes SOP
+- [Render Services Index](06-operations/RENDER_SERVICES_INDEX.md) — **Canonical reference** for all Render services (sourceapp-api, sourceapp-web, sourceapp-webapp, sourceapp-worker, sourceapp-db); where each is defined and documented
 - [Render API Access Setup](06-operations/RENDER_API_ACCESS_SETUP.md) — Enable programmatic access to Render (API key or CLI) for agents and scripts
 
 **Operations folders (legal and content):**
 - [Legal](06-operations/legal/) — Legal documents (terms of service, privacy policy, disclaimers). Managed per [Legal Documents SOP](06-operations/management/LEGAL_DOCUMENTS_SOP.md).
-  - [Cookie Policy](06-operations/legal/COOKIE_POLICY.md) — User-facing cookie disclosure (GDPR/ePrivacy–aligned); technical basis in Layer 4 cookies doc when it exists.
+  - [Cookie Policy](06-operations/legal/COOKIE_POLICY.md) — User-facing cookie disclosure (GDPR/ePrivacy–aligned); technical basis in [Cookies and Session](04-behavior/COOKIES_AND_SESSION.md).
 - [Content](06-operations/content/) — Website and app page content (homepage, landing, section copy). Managed per [Content Documents SOP](06-operations/management/CONTENT_DOCUMENTS_SOP.md).
 
 **Behavior doc usage SOPs** (how to use and maintain each Layer 4 behavior doc):
@@ -212,7 +225,7 @@ Add links here when created.
 - [UI Integration Points — Usage SOP](06-operations/usage/UI_INTEGRATION_POINTS_USAGE_SOP.md)
 - [Design System — Usage SOP](06-operations/usage/DESIGN_SYSTEM_USAGE_SOP.md)
 - [Subscription Tiers — Usage SOP](06-operations/usage/SUBSCRIPTION_TIERS_USAGE_SOP.md)
-- [Intended User Flows — Usage SOP](06-operations/usage/INTENDED_USER_FLOWS_USAGE_SOP.md) — When INTENDED_USER_FLOWS exists in `docs/04-behavior/`; creation per [User Flow Identification SOP](06-operations/examination/USER_FLOW_IDENTIFICATION_SOP.md)
+- [Intended User Flows — Usage SOP](06-operations/usage/INTENDED_USER_FLOWS_USAGE_SOP.md) — When the Intended User Flows doc exists in `docs/04-behavior/`; creation is per [User Flow Identification SOP](06-operations/examination/USER_FLOW_IDENTIFICATION_SOP.md)
 
 ---
 
@@ -225,9 +238,20 @@ Add links here when created.
 - [Templates: Feature Note](07-guides/templates/FEATURE_NOTE.md) — Template for documenting completed features
 - [Templates: SOP Template](07-guides/templates/SOP_TEMPLATE.md) — Standardized template for creating new Standard Operating Procedures
 - [Infrastructure: Authentication — Core Flow](07-guides/INFRASTRUCTURE_AUTHENTICATION_CORE_FLOW.md) — **Core infrastructure.** Recurring authentication method (passwordless magic-link + backup code, web + mobile) so you don’t have to figure it out again for each project; implementation checklist included.
-- [Infrastructure: Auth and Push Options](07-guides/INFRASTRUCTURE_AUTH_AND_PUSH_OPTIONS.md) — **Core infrastructure.** Auth mode (internal vs Firebase), admin toggles (internal_auth_enabled, firebase_auth_enabled), and push (FCM).
 - [Infrastructure: Render — Standard Setup](07-guides/INFRASTRUCTURE_RENDER_STANDARD_SETUP.md) — **Core infrastructure.** Standard Render deployment (static + API + worker + database); template in [render.yaml.template](07-guides/templates/render.yaml.template). Copy, replace project slug, deploy.
-- [GitHub Coordination Setup Guide](07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md) — **Core infrastructure.** Set up GitHub Projects and Discussions as agent coordination layer when starting a new project. Run when bootstrapping per [Bootstrap New Project](01-orientation/BOOTSTRAP_NEW_PROJECT.md).
+- [Production Deployment Validation](07-guides/PRODUCTION_DEPLOYMENT_VALIDATION.md) — Prevent Render deployment failures (e.g. `tsx: not found`); run validation before deploy when changing backend scripts or dependencies.
+- [Feature Note: Member App Shell](07-guides/FEATURE_NOTE_MEMBER_APP_SHELL.md) — Member app tab shell and 7 placeholder screens (Flutter); routes and entry from public home.
+- [Feature Note: Flutter Auth Screens](07-guides/FEATURE_NOTE_FLUTTER_AUTH_SCREENS.md) — Login and onboarding screens (Flutter); routes and entry; API stubbed.
+- [Feature Note: Flutter Component Conversion](07-guides/FEATURE_NOTE_FLUTTER_COMPONENT_CONVERSION.md) — AdComponent, FloatingHamburger, HamburgerMenu, BoardStaffManager, PollComposer (Flutter); API stubbed.
+- [Feature Note: Flutter Event & Deal Detail Screens](07-guides/FEATURE_NOTE_FLUTTER_EVENT_DEAL_DETAIL.md) — Member app event/deal detail (RSVP, redeem stubbed); routes /app/events/:id, /app/deals/:id.
+- [Feature Note: Flutter Candidate Screens](07-guides/FEATURE_NOTE_FLUTTER_CANDIDATE_SCREENS.md) — Member app candidates list + detail (donate/WinRed stubbed); routes /app/candidates, /app/candidates/:id.
+- [Feature Note: Flutter Poll Screens](07-guides/FEATURE_NOTE_FLUTTER_POLL_SCREENS.md) — Member app polls list, poll detail (vote stubbed), polling locations (the state voter lookup stubbed); routes /app/polls, /app/polls/:id, /app/polling.
+- [Feature Note: Flutter Additional Screens (Partial)](07-guides/FEATURE_NOTE_FLUTTER_ADDITIONAL_SCREENS_PARTIAL.md) — Profile Edit and Donate (save/payment stubbed); routes /app/profile/edit, /app/donate.
+- [Feature Note: Flutter Admin Screens (Partial)](07-guides/FEATURE_NOTE_FLUTTER_ADMIN_SCREENS_PARTIAL.md) — Admin dashboard, Polls (PollComposer), Directory (BoardStaffManager), placeholders; routes /app/admin/*.
+- [Feature Note: Stripe Donations](07-guides/FEATURE_NOTE_STRIPE_DONATIONS.md) — Backend Stripe Checkout integration; POST /api/donations/intake returns checkoutUrl; webhook /api/webhooks/stripe; webapp integration points.
+- [Feature Note: Render Services Index](07-guides/FEATURE_NOTE_RENDER_SERVICES_INDEX.md) — Canonical RENDER_SERVICES_INDEX.md for all five Render services (purpose, status, doc pointers); linked from docs spine.
+- [Feature Note: Marketing Site Full Content](07-guides/FEATURE_NOTE_MARKETING_SITE_FULL_CONTENT.md) — React marketing site (sourceapp-web) full content from sourcehub.example: assets, residents/business/tourists/government/be-proud-awards pages, board (15 members), forms, Support Us → Zeffy.
+- [Feature Note: Marketing Forms](07-guides/FEATURE_NOTE_MARKETING_FORMS.md) — Contact, Volunteer, Newsletter forms POST to backend; backend/routes/public-forms.ts; marketing/lib/api.ts.
 
 ---
 
@@ -240,34 +264,36 @@ Add links here when created.
 **These documents are time-bound and may become outdated.**
 
 **Status:**
-- [Current Status](08-status/CURRENT_STATUS.md) — Latest development updates and recent changes
-- [GitHub Coordination Migration Plan](08-status/GITHUB_COORDINATION_MIGRATION_PLAN.md) — For existing projects moving coordination from docs to GitHub. **New projects:** use [GitHub Coordination Setup Guide](07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md) instead.
-- *(Add migration docs per project when applicable: MIGRATION_EXECUTIVE_OVERVIEW.md, MIGRATION_READINESS_ASSESSMENT.md, BACKEND_ADAPTATION_PLAN.md, etc.)*
+- [Current Status](08-status/CURRENT_STATUS.md) — Single source of truth for current implementation and deployment status; when updating, follow AI.md “When updating status documentation” and Implementation Verification SOP Step 6 (what/why/how/when for traceability)
+- [Two Web Services — Architecture Plan](08-status/TWO_WEB_SERVICES_ARCHITECTURE_PLAN.md) — **Validated architecture** for React marketing (sourcehub.example) + Flutter app (app.sourcehub.example); deployment checklist, user flows, open decisions
 - [Active Work](08-status/ACTIVE_WORK.md) — **REQUIRED:** Check-out files before editing, check-in when done (procedure: [Active Work SOP](06-operations/coordination/ACTIVE_WORK_SOP.md))
 - [Active Work Log](08-status/ACTIVE_WORK_LOG.md) — **REQUIRED:** Append all check-out/check-in entries here (append-only, never remove); format and archive per [Active Work SOP](06-operations/coordination/ACTIVE_WORK_SOP.md)
-- [Integrity Check Log](08-status/INTEGRITY_CHECK_LOG.md) — **REQUIRED (daily):** Append-only log of repo integrity checks. If there is **no** entry for **today** (YYYY-MM-DD), run [Repo Integrity Check SOP](06-operations/coordination/REPO_INTEGRITY_CHECK_SOP.md) **before** the next operation. See [Process and behavior (reference)](#process-and-behavior-reference) above.
+- [Integrity Check Log](08-status/INTEGRITY_CHECK_LOG.md) — **REQUIRED (daily):** Append-only log of repo integrity checks. If there is **no** entry for **today** (YYYY-MM-DD), run [Repo Integrity Check SOP](06-operations/coordination/REPO_INTEGRITY_CHECK_SOP.md) **before** the next operation. See **AI.md** “Before making changes.”
+- [Manual Sync Log](08-status/MANUAL_SYNC_LOG.md) — Append-only log of manual sync triggers; appending and committing changes the repo to force automatic syncs (e.g. deploy-on-push). Per [Manual Sync Trigger SOP](06-operations/coordination/MANUAL_SYNC_TRIGGER_SOP.md).
 - [Implementation Verification](08-status/IMPLEMENTATION_VERIFICATION.md) — Open and resolved implementation verification questions; procedure: [Implementation Verification SOP](06-operations/coordination/IMPLEMENTATION_VERIFICATION_SOP.md)
 - [Decision Log](08-status/decisions/DECISION_LOG.md) — Time-stamped record of major decisions with rationale and supersession pointers
+- [Flow Decisions — Approved](08-status/decisions/FLOW_DECISIONS_APPROVED.md) — Product decisions that resolve flow and branching questions from the User Flow and Branching Logic Specification; implementation must align with this document
 
-**Feature Requests:**
-- **GitHub Project → Feature Requests view** — Feature requests live in the Project (label `coordination:feature-request`); spec in item body. See [Documentation Process](06-operations/processes/DOCUMENTATION_PROCESS.md).
+**Feature Requests & Reports:** Live in [GitHub Project](https://github.com/dustintaylored/sourceapp/projects) (label `coordination:feature-request`, `coordination:report`). See [Coordination Model](01-orientation/COORDINATION_MODEL.md). [feature-requests/](08-status/feature-requests/README.md) and [reports/](08-status/reports/README.md) have deprecation notes. **How to create and deliver reports:** [Report Creation and Delivery SOP](06-operations/conventions/REPORT_CREATION_AND_DELIVERY_SOP.md).
 
 **QA:**
 - [QA: TODO](08-status/qa/QA_TODO.md) — QA checklist
 - [QA: Work Log](08-status/qa/QA_WORK_LOG.md) — QA work tracking
 
-**Documentation Reports:**
-- **Create reports:** Project items with label `coordination:report`; optionally promote to [08-status/reports/](08-status/reports/) after review. See [Coordination Model](01-orientation/COORDINATION_MODEL.md).
-- [Reports Guidelines](08-status/reports/README.md) — Folder structure and lifecycle; **how to create and deliver:** [Report Creation and Delivery SOP](06-operations/conventions/REPORT_CREATION_AND_DELIVERY_SOP.md)
-
 **Screen Examination:**
-- Reports under [08-status/screen-examination/](08-status/screen-examination/) — Per [Screen Examination SOP](06-operations/examination/SCREEN_EXAMINATION_SOP.md); add links here when reports exist
+- [2026-01-27 Screen Examination Report](08-status/screen-examination/2026-01-27_SCREEN_EXAMINATION_REPORT.md) — Full examination of gop_app per Screen Examination SOP
+- [2026-01-28 Screen Examination Report](08-status/screen-examination/2026-01-28_SCREEN_EXAMINATION_REPORT.md) — **Web implementation.** Public website (sourcehub.example) screen inventory for React/Next.js marketing site
+- [2026-01-29 SourceHub Website Examination Report](08-status/screen-examination/2026-01-29_SOURCEHUB_WEBSITE_EXAMINATION_REPORT.md) — **Full examination.** Live site review, content inventory, art assets pulled, functionality documented
+- Reports under [08-status/screen-examination/](08-status/screen-examination/) — All screen examination outputs
 
 **Backend Examination:**
-- Reports under [08-status/backend-examination/](08-status/backend-examination/) — Per [Backend Examination SOP](06-operations/examination/BACKEND_EXAMINATION_SOP.md); add links here when reports exist
+- [2026-01-27 Backend Examination Report](08-status/backend-examination/2026-01-27_BACKEND_EXAMINATION_REPORT.md) — Full examination of gop_app backend per Backend Examination SOP (working / not working / needing implementation)
+- Reports under [08-status/backend-examination/](08-status/backend-examination/) — All backend examination reports; per [Backend Examination SOP](06-operations/examination/BACKEND_EXAMINATION_SOP.md)
 
 **User Flow Identification:**
 - Authoritative doc: `docs/04-behavior/INTENDED_USER_FLOWS.md` (created/updated per [User Flow Identification SOP](06-operations/examination/USER_FLOW_IDENTIFICATION_SOP.md))
+- [User Flow and Branching Logic Specification](08-status/USER_FLOW_AND_BRANCHING_LOGIC_SPECIFICATION.md) — Implementation-oriented flows and branching; **each flow and each branching section is its own document** under [08-status/user-flows/](08-status/user-flows/) (14 flow docs + 6 branching docs); index and links in the spec
+- [user-flows/ README](08-status/user-flows/README.md) — Catalog of flow and branching documents
 - Optional dated reports under [08-status/user-flows/](08-status/user-flows/) — Audit runs; per [User Flow Identification SOP](06-operations/examination/USER_FLOW_IDENTIFICATION_SOP.md)
 
 **Scope of Work:**
@@ -281,29 +307,36 @@ Add links here when created.
 
 **I want to...**
 - **Use the recurring auth flow (passwordless magic-link + backup code, web + mobile)** → See [Infrastructure: Authentication — Core Flow](07-guides/INFRASTRUCTURE_AUTHENTICATION_CORE_FLOW.md)
-- **Configure auth mode (internal vs Firebase) and push (FCM)** → See [Infrastructure: Auth and Push Options](07-guides/INFRASTRUCTURE_AUTH_AND_PUSH_OPTIONS.md)
 - **Use the standard Render setup (static + API + worker + DB)** → See [Infrastructure: Render — Standard Setup](07-guides/INFRASTRUCTURE_RENDER_STANDARD_SETUP.md); template: [render.yaml.template](07-guides/templates/render.yaml.template)
-- **Set up agent coordination (GitHub Projects)** → See [GitHub Coordination Setup Guide](07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md); run when creating new project
 - **Understand deployment workflow** → See [Deployment Workflow](06-operations/DEPLOYMENT_WORKFLOW.md) — No local deployment; commit → push to GitHub → Render auto-syncs and deploys
+- **Find Render service documentation** → See [Render Services Index](06-operations/RENDER_SERVICES_INDEX.md) — All five services (sourceapp-api, sourceapp-web, sourceapp-webapp, sourceapp-worker, sourceapp-db) with doc references
+- **Set env vars by service/group (Render)** → See [ENV_VARS_RENDER.md](06-operations/ENV_VARS_RENDER.md) — List of variables to add and **where** (sourceapp-api, sourceapp-worker, sourceapp-webapp) when using grouped env vars
+- **Validate production deployment** → See [Production Deployment Validation SOP](06-operations/coordination/PRODUCTION_DEPLOYMENT_VALIDATION_SOP.md) — Run `cd backend && npm run validate:production` before pushing backend changes; prevents wasted Render build time and "command not found" failures · [Pre-Push Validation](06-operations/PRE_PUSH_VALIDATION.md)
 - **Set up Render API access (for agents/scripts)** → See [Render API Access Setup](06-operations/RENDER_API_ACCESS_SETUP.md) — API key or CLI for programmatic access
 - **Onboard to the project** → Start with [Layer 1](01-orientation/)
 - **Understand system rules** → Read [Layer 2](02-canon/)
-- **Understand database and architecture** → See Layer 3 (e.g. SYSTEM_MAP, database docs)
+- **Understand database and architecture** → See [System Map](03-architecture/SYSTEM_MAP.md), Layer 3
 - **Wire UI to API** → See Layer 4 (e.g. API Matrix, UI Integration Points)
 - **Integrate external providers** → See [Layer 5](05-integrations/)
 - **Follow documentation process** → See [Documentation Process](06-operations/processes/DOCUMENTATION_PROCESS.md)
 - **Ensure docs are up to date before commit** → See [Documentation Agent SOP](06-operations/coordination/DOCUMENTATION_AGENT_SOP.md) (pre-commit checklist)
+- **Commit changes (standard procedure)** → See [Commit Changes SOP](06-operations/coordination/COMMIT_CHANGES_SOP.md) — pre-commit checks, stage, message format, push
+- **Create a new SOP or operational asset** → See [Operational Asset Creation and Reinforcement SOP](06-operations/coordination/OPERATIONAL_ASSET_CREATION_AND_REINFORCEMENT_SOP.md) — discoverable, reinforce in AI.md, commit per Commit Changes SOP
+- **Create or run database migrations** → See [Database Migrations SOP](06-operations/processes/DATABASE_MIGRATIONS_SOP.md) — when to generate, where they go (`backend/db/migrations/`), when applied (manual; not auto on deploy), why
 - **Plan or run migration** → See [Migration Process](06-operations/processes/MIGRATION_PROCESS.md); **migration work without Render** → See [Migration: Work in Isolation of Render](06-operations/processes/MIGRATION_LOCAL_PHASE.md)
 - **Create or update Scope of Work** → See [Scope of Work SOP](06-operations/processes/SCOPE_OF_WORK_SOP.md); output in [08-status/scope-of-work/](08-status/scope-of-work/)
 - **Identify gaps (feature, infrastructure, scope)** → See [Gap Identification SOP](06-operations/processes/GAP_IDENTIFICATION_SOP.md); scope boundaries: [Project Scope](02-canon/PROJECT_SCOPE.md)
-- **Check current status** → See [Current Status](08-status/CURRENT_STATUS.md)
+- **Check current status** → See [Current Status](08-status/CURRENT_STATUS.md) — Single source of truth for implementation and deploy status
+- **Find member app (Flutter) API wiring status** → See [Current Status](08-status/CURRENT_STATUS.md) §2.2 — Which screens use API vs stubs; code-verified
+- **Understand web implementation** → See [2026-01-28 Screen Examination Report](08-status/screen-examination/2026-01-28_SCREEN_EXAMINATION_REPORT.md) (sourcehub.example inventory), [SourceHub Public Website Screens](08-status/feature-requests/SOURCEHUB_PUBLIC_WEBSITE_SCREENS.md) (React/Next.js marketing), [SourceApp Frontend-Backend Architecture SOP](06-operations/architecture/SOURCEAPP_FRONTEND_BACKEND_ARCHITECTURE_SOP.md)
 - **Examine screens** → See [Screen Examination SOP](06-operations/examination/SCREEN_EXAMINATION_SOP.md); reports in [08-status/screen-examination/](08-status/screen-examination/)
 - **Examine backend** → See [Backend Examination SOP](06-operations/examination/BACKEND_EXAMINATION_SOP.md); reports in [08-status/backend-examination/](08-status/backend-examination/)
 - **Document intended user flows** → See [User Flow Identification SOP](06-operations/examination/USER_FLOW_IDENTIFICATION_SOP.md); output in `docs/04-behavior/INTENDED_USER_FLOWS.md` (or equivalent); optional reports in [08-status/user-flows/](08-status/user-flows/)
 - **Manage legal or content docs** → See [Legal](06-operations/legal/) folder and [Legal Documents SOP](06-operations/management/LEGAL_DOCUMENTS_SOP.md); [Content](06-operations/content/) folder and [Content Documents SOP](06-operations/management/CONTENT_DOCUMENTS_SOP.md)
 - **Apply file naming** → See [File Naming Conventions](06-operations/conventions/FILE_NAMING_CONVENTIONS.md)
-- **Create or deliver a report** → See [Report Creation and Delivery SOP](06-operations/conventions/REPORT_CREATION_AND_DELIVERY_SOP.md); create Project items with `coordination:report`; reports in SOP-owned folders or [08-status/reports/](08-status/reports/) for promoted snapshots
+- **Create or deliver a report** → See [Report Creation and Delivery SOP](06-operations/conventions/REPORT_CREATION_AND_DELIVERY_SOP.md); reports in SOP-owned folders (screen-examination, backend-examination, user-flows) or in [08-status/reports/](08-status/reports/) with log in [REPORT_LOG](08-status/reports/REPORT_LOG.md)
 - **Run repo integrity check / verify daily integrity** → See [Repo Integrity Check SOP](06-operations/coordination/REPO_INTEGRITY_CHECK_SOP.md); check [Integrity Check Log](08-status/INTEGRITY_CHECK_LOG.md) for today—if no entry, run the SOP before the next operation
+- **Trigger manual sync / force automatic sync (e.g. redeploy)** → See [Manual Sync Trigger SOP](06-operations/coordination/MANUAL_SYNC_TRIGGER_SOP.md); append to [Manual Sync Log](08-status/MANUAL_SYNC_LOG.md) and commit (and push) to change repo and trigger syncs
 
 ### By Role
 
@@ -354,8 +387,8 @@ When adding new documents or structures:
 When making structural changes or verifying implementation status:
 
 1. **Verify the gap** — Confirm through code review that a documented/planned feature is not implemented
-2. **Update Project feature-request item** — Ensure the gap is listed in the "Not Yet Implemented" section of the relevant Project item (label `coordination:feature-request`)
+2. **Track in Project** — Ensure the gap is tracked in a Project item (label `coordination:feature-request` or `coordination:implementation-verification`)
 3. **Update verification** — Record verification in `08-status/IMPLEMENTATION_VERIFICATION.md`
-4. **Ask:** "Is this gap tracked in the feature-request item?"
+4. **Ask:** "Is this gap tracked in a Project item?"
 
-**Critical:** Implementation gaps must be tracked in the Project feature-request items. Never leave gaps untracked.
+**Critical:** Implementation gaps must be tracked in Project items. Never leave gaps untracked.

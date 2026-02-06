@@ -1,6 +1,6 @@
 # Agent Customization for New Projects — SOP
 
-**Purpose:** Standard Operating Procedure for customizing generic agent definitions from the blank template with project-specific context, making them more effective for delegation.
+**Purpose:** Standard Operating Procedure for customizing generic agent definitions from the origin_project template with project-specific context, making them more effective for delegation.
 
 **Status:** Active  
 **Applies To:** New project adoption, agent configuration  
@@ -10,7 +10,7 @@
 
 ## Overview
 
-When adopting infrastructure from blank, you get generic agent definitions that work but require agents to rediscover context every time. This SOP shows how to customize agents with:
+When adopting infrastructure from origin_project, you get generic agent definitions that work but require agents to rediscover context every time. This SOP shows how to customize agents with:
 
 1. **Project-specific paths** — Actual directory structure
 2. **Domain vocabulary** — What the project does, key entities
@@ -23,7 +23,7 @@ When adopting infrastructure from blank, you get generic agent definitions that 
 
 ## Prerequisites
 
-- Infrastructure adopted from blank
+- Infrastructure adopted from origin_project
 - Agent definitions exist in `.cursor/agents/`
 - Documentation complete (Layers 2-4)
 - Max Mode enabled for Task tool
@@ -193,7 +193,7 @@ cat > .cursor/agents/CUSTOMIZATION_LOG.md << 'EOF'
 
 **Date:** 2026-02-05
 **Project:** [Name]
-**Base:** Infrastructure from ~/Github/blank
+**Base:** Infrastructure from ~/Github/origin_project
 
 ## Customizations
 
@@ -238,7 +238,7 @@ EOF
 
 **When infrastructure updates:**
 
-1. Pull updates from blank
+1. Pull updates from origin_project
 2. Compare agent changes
 3. Merge generic improvements
 4. Preserve project customizations

@@ -1,6 +1,6 @@
 # Infrastructure Template Audit — SOP
 
-**Purpose:** Standard Operating Procedure for auditing whether the blank infrastructure template (`~/Github/blank/`) is out of sync with active projects and needs updates. Run periodically to ensure template stays current.
+**Purpose:** Standard Operating Procedure for auditing whether the blank infrastructure template (`~/Github/origin_project/`) is out of sync with active projects and needs updates. Run periodically to ensure template stays current.
 
 **Status:** Active  
 **Applies To:** Periodic maintenance (recommended: monthly or after major infrastructure changes)  
@@ -14,7 +14,7 @@ This SOP ensures that:
 
 1. **Detect drift** — Identify when active projects have infrastructure improvements not yet in the template
 2. **Prioritize updates** — Determine which infrastructure changes should be synced
-3. **Maintain template** — Keep blank template as the authoritative source of infrastructure
+3. **Maintain template** — Keep origin_project template as the authoritative source of infrastructure
 4. **Enable new projects** — Ensure new projects start with latest infrastructure
 
 **Run frequency:** Monthly, or after any significant infrastructure change in an active project.
@@ -26,11 +26,11 @@ This SOP ensures that:
 Before auditing:
 
 1. **Access to:**
-   - Blank template: `~/Github/blank/`
+   - Blank template: `~/Github/origin_project/`
    - Active project: `~/Github/project_sourceapp/sourceapp/`
 
 2. **Read documentation:**
-   - `~/Github/blank/docs/01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md` — What is infrastructure
+   - `~/Github/origin_project/docs/01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md` — What is infrastructure
    - `docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md` — How to sync
 
 3. **Understand infrastructure categories:**
@@ -49,9 +49,9 @@ Before auditing:
 
 - [ ] **Run diff between project and blank:**
   ```bash
-  # Compare SourceApp to blank
+  # Compare SourceApp to origin_project
   diff ~/Github/project_sourceapp/sourceapp/[infrastructure-file] \
-       ~/Github/blank/[same-path]
+       ~/Github/origin_project/[same-path]
   ```
 
 - [ ] **Record differences:**
@@ -72,13 +72,13 @@ Before auditing:
 
 | Change Type | Action |
 |------------|--------|
-| **Process improvement** | ✅ Sync to blank |
-| **New SOP added** | ✅ Sync to blank |
-| **Infrastructure pattern added** | ✅ Sync to blank |
-| **Template improved** | ✅ Sync to blank |
+| **Process improvement** | ✅ Sync to origin_project |
+| **New SOP added** | ✅ Sync to origin_project |
+| **Infrastructure pattern added** | ✅ Sync to origin_project |
+| **Template improved** | ✅ Sync to origin_project |
 | **Project name added** | ❌ Don't sync (make generic first) |
 | **Project-specific example** | ⚠️ Sync if marked as example |
-| **Bug fix in SOP** | ✅ Sync to blank |
+| **Bug fix in SOP** | ✅ Sync to origin_project |
 
 - [ ] **Classify priority:**
 
@@ -99,14 +99,14 @@ Before auditing:
 
 - [ ] **Create audit report:**
   ```bash
-  cd ~/Github/blank
+  cd ~/Github/origin_project
   cat > INFRASTRUCTURE_AUDIT_YYYY-MM-DD.md << 'EOF'
   # Infrastructure Template Audit
   
   **Date:** YYYY-MM-DD
   **Auditor:** [Agent/Person]
   **Projects Checked:** SourceApp
-  **Blank Template:** ~/Github/blank/
+  **Blank Template:** ~/Github/origin_project/
   
   ---
   
@@ -168,39 +168,39 @@ Before auditing:
 
 - [ ] **Follow Infrastructure Template Sync SOP:**
   - See: `INFRASTRUCTURE_TEMPLATE_SYNC_SOP.md`
-  - Copy file from project to blank
+  - Copy file from project to origin_project
   - Update inventory if new file
   - Document sync
 
 - [ ] **Verify sync:**
   ```bash
-  diff [project-file] ~/Github/blank/[same-path]
+  diff [project-file] ~/Github/origin_project/[same-path]
   # Should show no differences
   ```
 
 - [ ] **Mark as synced** in audit report
 
-**Output:** Critical/high changes synced to blank
+**Output:** Critical/high changes synced to origin_project
 
 ---
 
 ### Step 5: Verify Blank Has All Inventory Files and Check for New Infrastructure
 
-**5a. Ensure every file in CORE_INFRASTRUCTURE_INVENTORY exists in blank:**
+**5a. Ensure every file in CORE_INFRASTRUCTURE_INVENTORY exists in origin_project:**
 
 - [ ] **Open** `docs/01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md` and list every reusable file path.
-- [ ] **For each path,** check that `~/Github/blank/[path]` exists. If missing, copy from project to blank, then log in `~/Github/blank/INFRASTRUCTURE_VERSION_LOG.md`.
+- [ ] **For each path,** check that `~/Github/origin_project/[path]` exists. If missing, copy from project to origin_project, then log in `~/Github/origin_project/INFRASTRUCTURE_VERSION_LOG.md`.
 - [ ] **Result:** Blank directory contains all files listed in the inventory.
 
 **5b. Find new project-agnostic files not yet in inventory or blank:**
 
-- [ ] **Scan Layer 7:** `ls docs/07-guides/INFRASTRUCTURE_*.md` — compare to blank; any in project but not in blank or inventory must be added to inventory and synced to blank.
-- [ ] **Scan Layer 6:** `find docs/06-operations -name "*_SOP.md" -o -name "*_PROCESS.md"` — compare to CORE_INFRASTRUCTURE_INVENTORY and to blank; any project-agnostic SOP/process not in inventory must be added to inventory and synced to blank.
-- [ ] **Scan Layer 1:** Orientation files (except PROJECT_IDENTITY contents) — ensure all are in inventory and in blank.
+- [ ] **Scan Layer 7:** `ls docs/07-guides/INFRASTRUCTURE_*.md` — compare to origin_project; any in project but not in origin_project or inventory must be added to inventory and synced to origin_project.
+- [ ] **Scan Layer 6:** `find docs/06-operations -name "*_SOP.md" -o -name "*_PROCESS.md"` — compare to CORE_INFRASTRUCTURE_INVENTORY and to origin_project; any project-agnostic SOP/process not in inventory must be added to inventory and synced to origin_project.
+- [ ] **Scan Layer 1:** Orientation files (except PROJECT_IDENTITY contents) — ensure all are in inventory and in origin_project.
 
-- [ ] **For each new infrastructure file found:** Add entry to CORE_INFRASTRUCTURE_INVENTORY, copy file to `~/Github/blank/[same-path]`, log in INFRASTRUCTURE_VERSION_LOG, and ensure linked in docs/README.md.
+- [ ] **For each new infrastructure file found:** Add entry to CORE_INFRASTRUCTURE_INVENTORY, copy file to `~/Github/origin_project/[same-path]`, log in INFRASTRUCTURE_VERSION_LOG, and ensure linked in docs/README.md.
 
-**Output:** Blank is complete (all inventory files present); any new infrastructure has been added to inventory and synced to blank.
+**Output:** Blank is complete (all inventory files present); any new infrastructure has been added to inventory and synced to origin_project.
 
 ---
 
@@ -210,7 +210,7 @@ Before auditing:
 
 - [ ] **Update MANIFEST.md:**
   ```bash
-  cd ~/Github/blank
+  cd ~/Github/origin_project
   edit MANIFEST.md
   ```
   - Update file count
@@ -246,7 +246,7 @@ Use this checklist for each audit run:
 ## Infrastructure Audit Checklist — YYYY-MM-DD
 
 ### Pre-Audit
-- [ ] Blank template accessible: ~/Github/blank/
+- [ ] Blank template accessible: ~/Github/origin_project/
 - [ ] Active projects accessible
 - [ ] CORE_INFRASTRUCTURE_INVENTORY.md reviewed
 
@@ -321,7 +321,7 @@ echo "Audit complete. Review differences above."
 |--------|--------|---------|
 | **Audit frequency** | Monthly | Last audit date |
 | **Sync lag** | < 1 week for critical | Days between change and sync |
-| **Template completeness** | 100% of infrastructure | Files in blank / total infrastructure files |
+| **Template completeness** | 100% of infrastructure | Files in origin_project / total infrastructure files |
 | **Drift detection** | All differences found | Audit report completeness |
 
 ---
@@ -330,7 +330,7 @@ echo "Audit complete. Review differences above."
 
 ### Issue 1: Project Has Newer Infrastructure
 
-**Problem:** Project has improved SOP, blank is outdated
+**Problem:** Project has improved SOP, origin_project is outdated
 
 **Solution:** Sync project → blank (follow sync SOP)
 
@@ -351,7 +351,7 @@ echo "Audit complete. Review differences above."
 **Solution:**
 1. Make generic (replace with "this project" or "see PROJECT_IDENTITY")
 2. Mark examples as examples
-3. Then sync to blank
+3. Then sync to origin_project
 
 ---
 

@@ -1,0 +1,15 @@
+---
+description: Read AI.md first — entry point for all agent behavior
+alwaysApply: true
+---
+
+# Entry point
+
+**Read AI.md first.** It is the authoritative entry point for this repo.
+
+AI.md directs you to:
+- Coordination (GitHub Project, session start)
+- Navigation (docs hub, hierarchy)
+- Behavior rules and hard rules
+
+Do not skip AI.md. Follow its instructions before proceeding with other work.

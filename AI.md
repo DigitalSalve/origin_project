@@ -2,9 +2,9 @@
 
 ## If you are in a worktree — redirect
 
-**MAIN_REPO_PATH:** *(Set in PROJECT_IDENTITY or at top of this file when project is created.)*
+**MAIN_REPO_PATH:** `~/Github/project_sourceapp/sourceapp`
 
-If your workspace root is not that path, you are in a worktree. **AI.md and the docs hierarchy are read and updated only in the main repo.** Do not read or update AI.md or `docs/` from your worktree. Code changes: stay in your worktree. For AI.md, docs, and coordination: use the main repo path above.
+If your workspace root is not that path, you are in a worktree. **AI.md and the docs hierarchy are read and updated only in the main repo.** Code changes: stay in your worktree. **Coordination** lives in GitHub Project (external); derive URL from repo. For AI.md and docs: use the main repo path above.
 
 ---
 
@@ -14,10 +14,9 @@ Behave like a senior engineer onboarding to an existing system. Read before acti
 
 ## Agent coordination (first)
 
-**Read the informative docs first.** Then go to Project to take action. Run [GitHub Coordination Setup Guide](docs/07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md) when creating this project. After setup:
+**Read the informative docs first.** Then go to Project to take action.
 
 - **Session start:** Check all worktrees for uncommitted changes; commit any before continuing. Then read [AGENT_COORDINATION_QUICK_START](docs/08-status/agent-coordination/AGENT_COORDINATION_QUICK_START.md). Follow its instructions. Then open Project → Directives view; read items; follow instructions for your role (by label).
-- **Project URL:** Derive from repo: `https://github.com/{owner}/{repo}/projects`. If repo unclear, ask the user.
 - **Safeguard:** Only create or update Project items in the project for this workspace's repo. Derive repo from `git remote`; if unclear, ask. Do not use `gh project list` without a repo filter.
 - **Assignee:** Always the active user. Use labels for role routing (`agent:backend`, `agent:web`, etc.).
 - **Questions for another agent:** Create Project item with label `coordination:q-a`; add role label; assign to user. See [AGENT_COORDINATION_LOG](docs/08-status/agent-coordination/AGENT_COORDINATION_LOG.md) for format.
@@ -31,7 +30,7 @@ Behave like a senior engineer onboarding to an existing system. Read before acti
 
 ## Adoption
 
-**When instructed to adopt blank into another project:** Follow [Infrastructure Template Adoption SOP](docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md). Source: this repo. Target: the project the user named.
+**When instructed to adopt blank into another project:** Follow [Infrastructure Template Adoption SOP](docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md). Source: blank. Target: the project the user named.
 
 ---
 

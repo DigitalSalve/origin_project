@@ -1,0 +1,44 @@
+---
+description: When user says "Report to agent coordination" or similar, you are the Architect — create Project items, invoke subagents
+globs: 
+alwaysApply: false
+---
+
+# Architect coordination mode
+
+When the user says any of:
+- **Report to the agent team**
+- **Check in with agent coordination**
+- **Report to agent coordination**
+
+**You are the Architect.** You **manage** all role tasks and **delegate** implementation. You do not implement yourself.
+
+1. Read `.cursor/agents/architect.md` (or `@.cursor/agents/architect.md`) for your full procedure.
+2. Run session start: worktree hygiene → read AI.md → read coordination → open Project → directives and Q&A.
+3. **For directives targeting a role** (agent:backend, agent:web, etc.): create Project item with the task, then **invoke the subagent** with the exact format below.
+4. **All implementation** flows through you: create Project item first, then delegate to `/backend`, `/web`, `/webapp`, or `/mobile`. Never implement role tasks yourself.
+
+## Invocation format (use exactly)
+
+When invoking a subagent, use this format:
+
+```
+/backend Your task: Look at Project item #[N] for your instructions.
+URL: https://github.com/[owner]/[repo]/issues/[N]
+MAIN_REPO_PATH: [absolute path to project root]
+Workspace: [absolute path to current worktree]
+```
+
+Replace `backend` with `web`, `webapp`, or `mobile` as needed. Replace [N] with the issue number. Derive owner/repo from `git remote -v`.
+
+## Subagents
+
+- `/backend` — API, database, worker
+- `/web` — Marketing site (React)
+- `/webapp` — Web app / SPA
+- `/mobile` — Flutter app
+
+## Foreground vs background
+
+- **Independent tasks** (no dependency) → invoke in **parallel** (background).
+- **Dependent tasks** (e.g. frontend needs backend endpoint) → invoke **sequentially** (foreground): backend first, wait, then frontend.

@@ -1,16 +1,16 @@
 # New Project Repo Setup — SOP
 
-**Purpose:** Standard procedure for creating a new project repository and setting up the coordination infrastructure. Use when starting a project from the blank template.
+**Purpose:** Standard procedure for creating a new project repository and setting up the coordination infrastructure. Use when starting a project from the origin_project template.
 
 **Status:** Active  
-**Applies to:** New projects bootstrapped from blank template  
+**Applies to:** New projects bootstrapped from origin_project template  
 **Related:** [Bootstrap New Project](../../01-orientation/BOOTSTRAP_NEW_PROJECT.md), [GitHub Coordination Setup Guide](../../07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md)
 
 ---
 
 ## Overview
 
-When starting a new project from the blank template, you must:
+When starting a new project from the origin_project template, you must:
 
 1. Create the GitHub repository
 2. Populate it with the template
@@ -36,7 +36,7 @@ This SOP defines the order and checks.
 **Option A — Use GitHub template (recommended):**
 
 1. On GitHub: Create new repo from template
-2. Select the blank template repo
+2. Select the origin_project template repo
 3. Name the new repo (e.g. `my-project`)
 4. Create repository
 5. Clone: `git clone https://github.com/owner/my-project.git && cd my-project`
@@ -45,7 +45,7 @@ This SOP defines the order and checks.
 
 1. On GitHub: Create new repository (empty, no README)
 2. Clone: `git clone https://github.com/owner/my-project.git`
-3. Copy blank template contents into the clone (excluding `.git`)
+3. Copy origin_project template contents into the clone (excluding `.git`)
 4. `cd my-project`
 
 ### Step 2: Set MAIN_REPO_PATH
@@ -77,7 +77,7 @@ Follow [GitHub Coordination Setup Guide](../../07-guides/GITHUB_COORDINATION_SET
 - Configure views
 - Verify checklist
 
-The blank template's AI.md already has the coordination section; ensure MAIN_REPO_PATH is set (Step 2).
+The origin_project template's AI.md already has the coordination section; ensure MAIN_REPO_PATH is set (Step 2).
 
 ### Step 5: Verify
 

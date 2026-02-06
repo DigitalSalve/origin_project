@@ -1,6 +1,6 @@
 # Infrastructure Template Sync — SOP
 
-**Purpose:** Standard Operating Procedure for syncing core infrastructure file updates from active projects to the blank template (`~/Github/blank/`). Ensures the template stays current when infrastructure is improved or added in any project.
+**Purpose:** Standard Operating Procedure for syncing core infrastructure file updates from active projects to the origin_project template (`~/Github/origin_project/`). Ensures the template stays current when infrastructure is improved or added in any project.
 
 **Status:** Active  
 **Applies To:** Any infrastructure file changes in SourceApp (or other projects using this infrastructure base)  
@@ -12,12 +12,12 @@
 
 This SOP ensures that:
 
-1. **Infrastructure improvements propagate** — When infrastructure is updated in one project, the update flows to the blank template
-2. **Template stays current** — The blank template always reflects the latest infrastructure patterns
+1. **Infrastructure improvements propagate** — When infrastructure is updated in one project, the update flows to the origin_project template
+2. **Template stays current** — The origin_project template always reflects the latest infrastructure patterns
 3. **New projects benefit** — Projects started from the template get latest improvements automatically
 4. **Consistency maintained** — All projects can sync infrastructure updates from the template
 
-**The blank template at `~/Github/blank/` is the single source of truth for reusable infrastructure.**
+**The origin_project template at `~/Github/origin_project/` is the single source of truth for reusable infrastructure.**
 
 ---
 
@@ -37,8 +37,8 @@ Before syncing infrastructure:
    - ❌ Project-specific content (canon, architecture, behavior)
    - ❌ Project-specific SOPs (e.g., SOURCEAPP_*)
 
-3. **Have access to blank template:**
-   - Location: `~/Github/blank/`
+3. **Have access to origin_project template:**
+   - Location: `~/Github/origin_project/`
    - Ensure folder exists and is up to date
 
 ---
@@ -67,30 +67,30 @@ Before syncing infrastructure:
 
 ### Step 2: Sync to Blank Template
 
-**Copy updated file to blank template:**
+**Copy updated file to origin_project template:**
 
 - [ ] **Navigate to source project:**
   ```bash
   cd ~/Github/project_sourceapp/sourceapp
   ```
 
-- [ ] **Copy file to blank template:**
+- [ ] **Copy file to origin_project template:**
   ```bash
   # For infrastructure file in Layer 1, 6, or 7:
-  cp [changed-file-path] ~/Github/blank/[same-path]
+  cp [changed-file-path] ~/Github/origin_project/[same-path]
   
   # Example:
   cp docs/06-operations/processes/DOCUMENTATION_PROCESS.md \
-     ~/Github/blank/docs/06-operations/processes/DOCUMENTATION_PROCESS.md
+     ~/Github/origin_project/docs/06-operations/processes/DOCUMENTATION_PROCESS.md
   ```
 
 - [ ] **Verify copy successful:**
   ```bash
-  diff [source-file] ~/Github/blank/[same-path]
+  diff [source-file] ~/Github/origin_project/[same-path]
   # Should show no differences
   ```
 
-**Output:** File synced to blank template
+**Output:** File synced to origin_project template
 
 ---
 
@@ -100,7 +100,7 @@ Before syncing infrastructure:
 
 - [ ] **Add to CORE_INFRASTRUCTURE_INVENTORY.md:**
   ```bash
-  cd ~/Github/blank
+  cd ~/Github/origin_project
   edit docs/01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md
   ```
 
@@ -131,8 +131,8 @@ Before syncing infrastructure:
 - [ ] **Identify other projects** using this infrastructure
 - [ ] **For each project, copy infrastructure file:**
   ```bash
-  # Copy from blank to other projects
-  cp ~/Github/blank/[infrastructure-file] \
+  # Copy from origin_project to other projects
+  cp ~/Github/origin_project/[infrastructure-file] \
      ~/Github/other-project/[same-path]
   ```
 
@@ -147,9 +147,9 @@ Before syncing infrastructure:
 
 **Record the infrastructure update:**
 
-- [ ] **Add entry to blank template's version log:**
+- [ ] **Add entry to origin_project template's version log:**
   ```bash
-  cd ~/Github/blank
+  cd ~/Github/origin_project
   echo "YYYY-MM-DD: Updated [FILE_NAME] - [reason]" >> INFRASTRUCTURE_VERSION_LOG.md
   ```
 
@@ -161,9 +161,9 @@ Before syncing infrastructure:
   - Improved: [ENHANCEMENTS]
   ```
 
-- [ ] **Optionally commit to Git** (if blank is version controlled):
+- [ ] **Optionally commit to Git** (if origin_project is version controlled):
   ```bash
-  cd ~/Github/blank
+  cd ~/Github/origin_project
   git add .
   git commit -m "Infrastructure update: [description]"
   ```
@@ -177,8 +177,8 @@ Before syncing infrastructure:
 **When you add a new project-agnostic SOP, process, or infrastructure doc (e.g. new `*_SOP.md` in Layer 6, new `INFRASTRUCTURE_*.md` in Layer 7):**
 
 1. **Add to CORE_INFRASTRUCTURE_INVENTORY** — In `docs/01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md`, add an entry for the new file (path, purpose, reusability). Update category counts if needed.
-2. **Copy to blank** — Copy the new file to `~/Github/blank/[same-path]`. Create parent directories in blank if they do not exist.
-3. **Log the sync** — Append an entry to `~/Github/blank/INFRASTRUCTURE_VERSION_LOG.md` (date, file added, brief reason).
+2. **Copy to origin_project** — Copy the new file to `~/Github/origin_project/[same-path]`. Create parent directories in origin_project if they do not exist.
+3. **Log the sync** — Append an entry to `~/Github/origin_project/INFRASTRUCTURE_VERSION_LOG.md` (date, file added, brief reason).
 4. **Link in docs/README.md** — Ensure the new doc is linked in the correct layer in `docs/README.md` (and in `docs/06-operations/README.md` if under Layer 6).
 
 **Do this immediately** when creating new project-agnostic documentation; do not defer to the monthly audit.
@@ -187,13 +187,13 @@ Before syncing infrastructure:
 
 ## Verify Blank Has All Inventory Files
 
-**Periodically (e.g. during audit or before release) check that the blank template is complete:**
+**Periodically (e.g. during audit or before release) check that the origin_project template is complete:**
 
 - [ ] **Open CORE_INFRASTRUCTURE_INVENTORY.md** and list every file path marked as reusable.
-- [ ] **For each path,** verify the file exists at `~/Github/blank/[path]`. If it is missing, copy from this project to blank and log the sync.
-- [ ] **Scan this project** for new infrastructure not yet in the inventory (e.g. `docs/06-operations/**/*_SOP.md`, `docs/07-guides/INFRASTRUCTURE_*.md`). Any project-agnostic file that belongs in the template must be added to the inventory and copied to blank.
+- [ ] **For each path,** verify the file exists at `~/Github/origin_project/[path]`. If it is missing, copy from this project to origin_project and log the sync.
+- [ ] **Scan this project** for new infrastructure not yet in the inventory (e.g. `docs/06-operations/**/*_SOP.md`, `docs/07-guides/INFRASTRUCTURE_*.md`). Any project-agnostic file that belongs in the template must be added to the inventory and copied to origin_project.
 
-**Output:** Blank directory contains all files in the inventory; any new infrastructure has been added to inventory and synced to blank.
+**Output:** Blank directory contains all files in the inventory; any new infrastructure has been added to inventory and synced to origin_project.
 
 ---
 
@@ -238,7 +238,7 @@ Reason: [why changed]
 
 - [ ] File is in infrastructure inventory
 - [ ] No project-specific content (checked)
-- [ ] Copied to ~/Github/blank/[path]
+- [ ] Copied to ~/Github/origin_project/[path]
 - [ ] Verified with diff (no errors)
 - [ ] Updated CORE_INFRASTRUCTURE_INVENTORY.md (if new)
 - [ ] Added to Recent Additions
@@ -261,13 +261,13 @@ Synced by: [agent/person]
 # Created new pattern in SourceApp
 File: docs/07-guides/INFRASTRUCTURE_OPTIMAL_FRONTEND_BACKEND_ARCHITECTURE.md
 
-# Sync to blank
+# Sync to origin_project
 cd ~/Github/project_sourceapp/sourceapp
 cp docs/07-guides/INFRASTRUCTURE_OPTIMAL_FRONTEND_BACKEND_ARCHITECTURE.md \
-   ~/Github/blank/docs/07-guides/
+   ~/Github/origin_project/docs/07-guides/
 
 # Update inventory
-cd ~/Github/blank
+cd ~/Github/origin_project
 edit docs/01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md
 # Add to Category 10: Infrastructure Guides
 
@@ -284,17 +284,17 @@ echo "2026-01-28: Added optimal architecture pattern" >> INFRASTRUCTURE_VERSION_
 File: docs/06-operations/examination/SCREEN_EXAMINATION_SOP.md
 Change: Added new checklist item for error handling
 
-# Sync to blank
+# Sync to origin_project
 cd ~/Github/project_sourceapp/sourceapp
 cp docs/06-operations/examination/SCREEN_EXAMINATION_SOP.md \
-   ~/Github/blank/docs/06-operations/examination/
+   ~/Github/origin_project/docs/06-operations/examination/
 
 # Verify
 diff docs/06-operations/examination/SCREEN_EXAMINATION_SOP.md \
-     ~/Github/blank/docs/06-operations/examination/SCREEN_EXAMINATION_SOP.md
+     ~/Github/origin_project/docs/06-operations/examination/SCREEN_EXAMINATION_SOP.md
 
 # Document
-cd ~/Github/blank
+cd ~/Github/origin_project
 echo "YYYY-MM-DD: Improved SCREEN_EXAMINATION_SOP - added error handling check" >> INFRASTRUCTURE_VERSION_LOG.md
 ```
 
@@ -302,10 +302,10 @@ echo "YYYY-MM-DD: Improved SCREEN_EXAMINATION_SOP - added error handling check" 
 
 ## Notes
 
-- **Sync direction:** Active projects → blank template → other projects
+- **Sync direction:** Active projects → origin_project template → other projects
 - **Blank is source of truth:** The template is authoritative for infrastructure
 - **Project-specific stays separate:** Never sync project-specific content
-- **Bidirectional:** Projects can also pull updates from blank
+- **Bidirectional:** Projects can also pull updates from origin_project
 - **Version control recommended:** Keep blank in Git for history
 
 ---
@@ -313,7 +313,7 @@ echo "YYYY-MM-DD: Improved SCREEN_EXAMINATION_SOP - added error handling check" 
 ## Integration with Other Processes
 
 - **CORE_INFRASTRUCTURE_INVENTORY.md:** Defines what is infrastructure (must be checked first)
-- **BOOTSTRAP_NEW_PROJECT.md:** Uses blank template to start new projects
+- **BOOTSTRAP_NEW_PROJECT.md:** Uses origin_project template to start new projects
 - **DOCUMENTATION_PROCESS.md:** When infrastructure is documented as part of features
 - **REPO_INTEGRITY_CHECK_SOP.md:** Can check if project infrastructure is out of sync with blank
 
@@ -323,7 +323,6 @@ echo "YYYY-MM-DD: Improved SCREEN_EXAMINATION_SOP - added error handling check" 
 
 - [Core Infrastructure Inventory](../../01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md) — What qualifies as infrastructure
 - [Bootstrap New Project](../../01-orientation/BOOTSTRAP_NEW_PROJECT.md) — How new projects use the template
-- [Infrastructure Template Adoption SOP](INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md) — Apply blank to existing project (opposite of sync)
 - [Infrastructure Template Audit SOP](INFRASTRUCTURE_TEMPLATE_AUDIT_SOP.md) — How to check for sync drift
 
 ---

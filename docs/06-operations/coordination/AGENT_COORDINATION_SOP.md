@@ -69,9 +69,9 @@ Open
 **Project field:** Set to project slug (e.g. `sourceapp`)  
 **Assign:** User (active user by default; never assign to "agent")
 
-### Response format (target agent's comment)
+### Response format (target agent adds comment)
 
-When you are the target agent, add a comment in this format:
+When you are the target agent, add a **response** as a comment in this format:
 
 ```markdown
 ## Answer
@@ -143,3 +143,59 @@ Break out when the exchange grows or the outcome belongs in canon, architecture,
 ---
 
 **Last Updated:** 2026-01-28
+
+---
+
+## Q&A Coordination Pattern (Two-Phase)
+
+**Problem:** Q&A directives require the questioner to wait for a response, then acknowledge and close. Subagents are temporary and lose context between invocations.
+
+**Solution: Two-phase pattern**
+
+### Phase 1: Investigation and Questions (Initial Invocation)
+
+**Architect creates directive:**
+```markdown
+Title: Q&A: [Agent] - [Topic]
+Labels: agent:[role], coordination:q-a
+Body:
+Investigate [topic]. Post your findings and any questions for Architect.
+
+When Architect responds with decisions, you will be re-invoked to acknowledge and close.
+```
+
+**Subagent task:**
+1. Investigate
+2. Post questions/findings as comment
+3. Report back: "Questions posted, awaiting Architect response"
+
+### Phase 2: Acknowledgment and Closure (Re-invocation after Architect responds)
+
+**Architect responds with decisions, then re-invokes subagent:**
+```
+Task(
+  subagent_type="backend",
+  prompt="The Architect has responded to your questions on Project item #N. 
+  Read the Architect's response, acknowledge the decisions, post final report, 
+  and close the issue."
+)
+```
+
+**Subagent task:**
+1. Read Architect's response
+2. Post final report:
+   ```markdown
+   ## Report
+   
+   Acknowledged Architect decisions:
+   - [List key decisions/answers]
+   
+   Status: Resolved per Architect response.
+   ```
+3. Set Project item Status to Resolved
+4. Report back: "Complete"
+
+**Why this matters:** Without re-invocation, Q&A items stay open with no closure or the Architect closes them manually (breaking subagent ownership pattern).
+
+**Template:** See [QA_DIRECTIVE_TEMPLATE](../../08-status/agent-coordination/QA_DIRECTIVE_TEMPLATE.md)
+

@@ -19,10 +19,6 @@ This infrastructure base provides:
 
 **Use:** When starting a new project, copy these files as-is and fill in project-specific content in designated layers.
 
-**Infrastructure lock:** Only the Architect Agent may create, modify, or delete files listed in this inventory. Other agents must not change them; create a Project item (label `coordination:q-a`, target `agent:architect`) or invoke Architect. See AI.md Hard rules.
-
-**When Architect changes infrastructure:** Include in the directive: **Update worktrees** — Agents in worktrees must commit any outstanding changes first, then pull (e.g. `git fetch origin main && git merge origin/main`). See AGENT_PROMPTS "For the Architect."
-
 ---
 
 ## Quick Reference
@@ -30,15 +26,15 @@ This infrastructure base provides:
 | Category | Count | Purpose |
 |----------|-------|---------|
 | **Root Files** | 1 | AI entry point |
-| **Navigation** | 7 | Project hierarchy, global rules, coordination model, guidelines, docs spine, getting started |
-| **Processes** | 7 | Repo setup, migration, documentation, SOW, gap identification, adoption |
-| **Coordination** | 6 | Active work, integrity checks, verification, agent coordination, agent session hook |
+| **Navigation** | 4 | Documentation spine, guidelines, getting started |
+| **Processes** | 6 | Repo setup, migration, documentation, SOW, gap identification |
+| **Coordination** | 6 | Active work, agent coordination, session hook, integrity checks, verification |
 | **Examination** | 3 | Screen, backend, user flow examination |
 | **Conventions** | 2 | File naming, report creation |
-| **Management** | 3 | Legal, content, integration platforms |
+| **Management** | 4 | Legal, content, integration platforms, environment variables |
 | **Usage SOPs** | 6 | How to use behavior docs |
 | **Templates** | 3 | Feature notes, SOPs, render.yaml |
-| **Infrastructure Guides** | 4 | Auth flow, auth/push options, Render setup, optimal architecture |
+| **Infrastructure Guides** | 3 | Auth flow, Render setup, optimal architecture |
 | **Structure Files** | ~12 | Status folder structure, READMEs |
 | **TOTAL** | ~48 files | Complete infrastructure base |
 
@@ -48,37 +44,17 @@ This infrastructure base provides:
 
 ### AI.md
 **Location:** Repository root  
-**Purpose:** Entry point for AI agents; defines behavior rules and hard rules; points to docs/README.md for docs spine, required reading order, and all process (feature requests, before making changes, coordination, etc.)  
+**Purpose:** Entry point for AI agents; defines behavior rules, reading order, feature request process, coordination requirements  
 **Reusable:** Yes (references PROJECT_IDENTITY for project name)  
-**When copying:** Copy unchanged; it points to PROJECT_IDENTITY.md and docs/README.md
+**When copying:** Copy unchanged; it points to PROJECT_IDENTITY.md
 
 ---
 
-## Category 2: Navigation & Orientation (6 files)
-
-### docs/01-orientation/PROJECT_DOCUMENTATION_HIERARCHY.md
-**Location:** `docs/01-orientation/PROJECT_DOCUMENTATION_HIERARCHY.md`  
-**Purpose:** Single explanation of the project documentation hierarchy: what it is, why it exists, how it works for humans and agents  
-**Reusable:** Yes (structure is project-agnostic)  
-**When copying:** Copy unchanged
-
-### docs/01-orientation/GLOBAL_AI_AGENT_RULES.md
-**Location:** `docs/01-orientation/GLOBAL_AI_AGENT_RULES.md`  
-**Purpose:** Project-agnostic rules for all AI agents; optimized for context consumption; documents hierarchy, separation of concerns, coordination patterns  
-**Reusable:** Yes (rules apply across all projects)  
-**When copying:** Copy unchanged  
-**Created:** 2026-01-28
-
-### docs/01-orientation/COORDINATION_MODEL.md
-**Location:** `docs/01-orientation/COORDINATION_MODEL.md`  
-**Purpose:** Single source of truth for coordination model: what lives in GitHub Project vs docs; worktree desync reasoning; full flow by artifact type (feature requests, reports, directives); adoption and migration  
-**Reusable:** Yes (model is project-agnostic)  
-**When copying:** Copy unchanged  
-**Created:** 2026-01-28
+## Category 2: Navigation & Orientation (3 files)
 
 ### docs/README.md
 **Location:** `docs/README.md`  
-**Purpose:** **Docs spine hub:** navigation to all 8 layers; required reading order; discovery flow; Process and behavior reference table (feature requests, before making changes, gaps, scope, coordination, etc.). AI.md points here for all docs-spine and process.  
+**Purpose:** Navigation spine to all 8 documentation layers; master index  
 **Reusable:** Yes (layer structure is fixed; links are placeholders)  
 **When copying:** Copy unchanged; fill in layer 2-5 links per project
 
@@ -149,13 +125,6 @@ This infrastructure base provides:
 **When copying:** Copy unchanged  
 **Created:** 2026-01-28
 
-### INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md
-**Location:** `docs/06-operations/processes/INFRASTRUCTURE_TEMPLATE_ADOPTION_SOP.md`  
-**Purpose:** Adopt blank infrastructure into an existing project; copy infrastructure, merge vs replace, adapt placeholders, set up GitHub coordination  
-**Reusable:** Yes (adoption process is universal)  
-**When copying:** Copy unchanged  
-**Created:** 2026-01-28
-
 ### NEW_PROJECT_REPO_SETUP_SOP.md
 **Location:** `docs/06-operations/processes/NEW_PROJECT_REPO_SETUP_SOP.md`  
 **Purpose:** Repo creation, MAIN_REPO_PATH setup, and coordination bootstrap for new projects  
@@ -164,6 +133,37 @@ This infrastructure base provides:
 **Created:** 2026-01-28
 
 ---
+
+## Category 4: Coordination (6 files)
+
+### ACTIVE_WORK_SOP.md
+**Location:** `docs/06-operations/coordination/ACTIVE_WORK_SOP.md`  
+**Purpose:** Check-out/check-in process for file coordination; GitHub mode + docs mode fallback  
+**Reusable:** Yes (coordination format is universal)  
+**When copying:** Copy unchanged
+
+### AGENT_COORDINATION_SOP.md
+**Location:** `docs/06-operations/coordination/AGENT_COORDINATION_SOP.md`  
+**Purpose:** Agent-to-agent communication — questions, alignment, administrative coordination; GitHub Project is canonical channel  
+**Reusable:** Yes (coordination format is universal)  
+**When copying:** Copy unchanged; output: GitHub Project items with label `coordination:q-a`
+
+### AGENT_SESSION_HOOK_SOP.md
+**Location:** `docs/06-operations/coordination/AGENT_SESSION_HOOK_SOP.md`  
+**Purpose:** Defines the hook command ("Report to the agent team") — when user gives this command, agent reads GitHub Project Directives view, responds to coordination items, then does work  
+**Reusable:** Yes (command and procedure are universal)  
+**When copying:** Copy unchanged
+
+### DOCUMENTATION_AGENT_SOP.md
+**Location:** `docs/06-operations/coordination/DOCUMENTATION_AGENT_SOP.md`  
+**Purpose:** Pre-commit documentation checklist  
+**Reusable:** Yes (checklist is generic)  
+**When copying:** Copy unchanged
+
+### IMPLEMENTATION_VERIFICATION_SOP.md
+**Location:** `docs/06-operations/coordination/IMPLEMENTATION_VERIFICATION_SOP.md`  
+**Purpose:** Verify implementation status, track gaps  
+**Reusable:** Yes (verification process is universal)  
 
 ### AGENT_CUSTOMIZATION_SOP.md
 **Location:** `docs/06-operations/processes/AGENT_CUSTOMIZATION_SOP.md`  
@@ -185,43 +185,12 @@ This infrastructure base provides:
 **Reusable:** Yes (testing process is universal)  
 **When copying:** Copy unchanged  
 **Created:** 2026-02-05
-
-## Category 4: Coordination (6 files)
-
-### ACTIVE_WORK_SOP.md
-**Location:** `docs/06-operations/coordination/ACTIVE_WORK_SOP.md`  
-**Purpose:** Check-out/check-in process for file coordination  
-**Reusable:** Yes (coordination format is universal)  
-**When copying:** Copy unchanged
-
-### DOCUMENTATION_AGENT_SOP.md
-**Location:** `docs/06-operations/coordination/DOCUMENTATION_AGENT_SOP.md`  
-**Purpose:** Pre-commit documentation checklist  
-**Reusable:** Yes (checklist is generic)  
-**When copying:** Copy unchanged
-
-### IMPLEMENTATION_VERIFICATION_SOP.md
-**Location:** `docs/06-operations/coordination/IMPLEMENTATION_VERIFICATION_SOP.md`  
-**Purpose:** Verify implementation status, track gaps  
-**Reusable:** Yes (verification process is universal)  
 **When copying:** Copy unchanged
 
 ### REPO_INTEGRITY_CHECK_SOP.md
 **Location:** `docs/06-operations/coordination/REPO_INTEGRITY_CHECK_SOP.md`  
 **Purpose:** Daily repo integrity check (spine, layers, links)  
 **Reusable:** Yes (integrity checks are structural)  
-**When copying:** Copy unchanged
-
-### AGENT_COORDINATION_SOP.md
-**Location:** `docs/06-operations/coordination/AGENT_COORDINATION_SOP.md`  
-**Purpose:** Agent-to-agent communication — questions, alignment, administrative coordination; GitHub Project is canonical channel  
-**Reusable:** Yes (coordination format is universal)  
-**When copying:** Copy unchanged; output: GitHub Project items with label `coordination:q-a`
-
-### AGENT_SESSION_HOOK_SOP.md
-**Location:** `docs/06-operations/coordination/AGENT_SESSION_HOOK_SOP.md`  
-**Purpose:** Defines the hook command ("Report to the agent team") — when user gives this command, agent reads GitHub Project Directives view, responds to coordination items, then does work  
-**Reusable:** Yes (command and procedure are universal)  
 **When copying:** Copy unchanged
 
 ---
@@ -264,7 +233,13 @@ This infrastructure base provides:
 
 ---
 
-## Category 7: Management (3 files)
+## Category 7: Management (4 files)
+
+### ENVIRONMENT_VARIABLES_MANAGEMENT_SOP.md
+**Location:** `docs/06-operations/management/ENVIRONMENT_VARIABLES_MANAGEMENT_SOP.md`  
+**Purpose:** Add, remove, or change env vars (Render dashboard, env groups, per-service; local .env); keep .env.example, README, render.yaml in sync; no secrets in repo  
+**Reusable:** Yes (procedure is generic; service names follow PROJECT_IDENTITY)  
+**When copying:** Copy unchanged
 
 ### LEGAL_DOCUMENTS_SOP.md
 **Location:** `docs/06-operations/management/LEGAL_DOCUMENTS_SOP.md`  
@@ -348,7 +323,7 @@ This infrastructure base provides:
 
 ---
 
-## Category 10: Infrastructure Guides (4 files)
+## Category 10: Infrastructure Guides (3 files)
 
 ### INFRASTRUCTURE_AUTHENTICATION_CORE_FLOW.md
 **Location:** `docs/07-guides/INFRASTRUCTURE_AUTHENTICATION_CORE_FLOW.md`  
@@ -364,34 +339,12 @@ This infrastructure base provides:
 **Benefit:** Don't re-derive deployment stack for each project  
 **When copying:** Copy unchanged; use with render.yaml.template
 
-### INFRASTRUCTURE_AUTH_AND_PUSH_OPTIONS.md
-**Location:** `docs/07-guides/INFRASTRUCTURE_AUTH_AND_PUSH_OPTIONS.md`  
-**Purpose:** Auth mode (internal vs Firebase) and push (FCM); admin toggles for internal_auth_enabled and firebase_auth_enabled  
-**Reusable:** Yes — **Core infrastructure**  
-**Benefit:** Don't re-derive auth-mode and push decisions for each project  
-**When copying:** Copy unchanged; implementation checklists included
-
 ### INFRASTRUCTURE_OPTIMAL_FRONTEND_BACKEND_ARCHITECTURE.md
 **Location:** `docs/07-guides/INFRASTRUCTURE_OPTIMAL_FRONTEND_BACKEND_ARCHITECTURE.md`  
 **Purpose:** Optimal architecture for web + mobile apps with SEO (React marketing + Flutter app + TypeScript backend)  
 **Reusable:** Yes — **Core infrastructure**  
 **Benefit:** Don't re-derive architecture decisions for each project  
 **When copying:** Copy unchanged; includes deep links, user flows, tech selection  
-**Created:** 2026-01-28
-
-### GITHUB_COORDINATION_SETUP_GUIDE.md
-**Location:** `docs/07-guides/GITHUB_COORDINATION_SETUP_GUIDE.md`  
-**Purpose:** Complete guide for setting up GitHub Projects and Discussions as agent coordination layer when starting a new project  
-**Reusable:** Yes — **Core infrastructure**  
-**Benefit:** New projects have worktree-consistent coordination from day one; no re-deriving logistics  
-**When copying:** Copy unchanged; run when bootstrapping new project per BOOTSTRAP_NEW_PROJECT.md  
-**Created:** 2026-01-28
-
-### GITHUB_COORDINATION_MIGRATION_PLAN.md
-**Location:** `docs/08-status/GITHUB_COORDINATION_MIGRATION_PLAN.md`  
-**Purpose:** Migration plan for existing projects moving coordination from docs to GitHub  
-**Reusable:** Yes (reference; execution is project-specific)  
-**When copying:** Copy unchanged; applies to projects with docs-based coordination  
 **Created:** 2026-01-28
 
 ---
@@ -409,21 +362,20 @@ These define the **structure and format** for Layer 8 (Status). Contents are pro
 | `docs/08-status/INTEGRITY_CHECK_LOG.md` | Daily repo integrity checks (format) | ✅ Structure (reset for new project) |
 | `docs/08-status/IMPLEMENTATION_VERIFICATION.md` | Implementation questions (format) | ✅ Structure (reset for new project) |
 | `docs/08-status/CURRENT_STATUS.md` | Latest development updates | ⚠️ Template only (contents project-specific) |
-| `docs/08-status/feature-requests/FEATURE_REQUEST_TODO.md` | **Deprecated.** Feature requests live in GitHub Project. | ⚠️ Deprecated |
+| GitHub Project (Feature Requests view) | Prioritized feature list; label `coordination:feature-request` | N/A (external) |
 
 ### Folder Structure (Reusable)
 
 | Folder | Purpose | Copy? |
 |--------|---------|-------|
-| `docs/08-status/feature-requests/` | **Deprecated for active work.** Feature requests live in GitHub Project. Folder may hold README or legacy completed snapshots. | ⚠️ Deprecated |
+| `docs/08-status/feature-requests/` | Optional archive; feature requests live in Project | ✅ Folder + README (deprecated for new work) |
 | `docs/08-status/screen-examination/` | Screen examination reports | ✅ Folder + README (not contents) |
 | `docs/08-status/backend-examination/` | Backend examination reports | ✅ Folder + README (not contents) |
 | `docs/08-status/user-flows/` | User flow reports | ✅ Folder structure |
-| `docs/08-status/reports/` | General reports. Create Project items with `coordination:report`; optionally promote to folder. | ✅ Folder + README (Project-based) |
+| `docs/08-status/reports/` | General reports | ✅ Folder + README + REPORT_LOG format |
 | `docs/08-status/qa/` | QA tracking | ✅ Folder structure |
 | `docs/08-status/decisions/` | Decision log | ✅ Folder structure |
 | `docs/08-status/scope-of-work/` | Scope of Work | ✅ Folder structure |
-| `docs/08-status/agent-coordination/` | Agent-to-agent communication. AI.md and docs are main-repo only; MAIN_REPO_PATH at top of AI.md. Includes SUBAGENT_TRANSITION_PLAN for Architect + Cursor subagents. | ✅ Folder + README + AGENT_DIRECTIVES + AGENT_COORDINATION_LOG + AGENT_PROMPTS + AGENT_COORDINATION_QUICK_START + SUBAGENT_TRANSITION_PLAN |
 
 ---
 
@@ -472,15 +424,9 @@ These define the **structure and format** for Layer 8 (Status). Contents are pro
 ```
 Root:
 ├─ AI.md
-├─ ADOPTION.md (one-liner adoption prompt)
-├─ .cursor/rules/ (read-ai-md-first.mdc)
-└─ .cursor/agents/ (Cursor subagents: architect, backend, web, webapp, mobile)
 
 Layer 1 (Orientation):
 ├─ docs/README.md
-├─ docs/01-orientation/COORDINATION_MODEL.md
-├─ docs/01-orientation/PROJECT_DOCUMENTATION_HIERARCHY.md
-├─ docs/01-orientation/GLOBAL_AI_AGENT_RULES.md
 ├─ docs/01-orientation/GETTING_STARTED.md
 ├─ docs/01-orientation/BOOTSTRAP_NEW_PROJECT.md
 └─ docs/01-orientation/CORE_INFRASTRUCTURE_INVENTORY.md (this file)
@@ -497,8 +443,6 @@ Layer 6 (Operations):
 │   └─ GAP_IDENTIFICATION_SOP.md
 ├─ docs/06-operations/coordination/
 │   ├─ ACTIVE_WORK_SOP.md
-│   ├─ AGENT_COORDINATION_SOP.md
-│   ├─ AGENT_SESSION_HOOK_SOP.md
 │   ├─ DOCUMENTATION_AGENT_SOP.md
 │   ├─ IMPLEMENTATION_VERIFICATION_SOP.md
 │   └─ REPO_INTEGRITY_CHECK_SOP.md
@@ -510,6 +454,7 @@ Layer 6 (Operations):
 │   ├─ FILE_NAMING_CONVENTIONS.md
 │   └─ REPORT_CREATION_AND_DELIVERY_SOP.md
 ├─ docs/06-operations/management/
+│   ├─ ENVIRONMENT_VARIABLES_MANAGEMENT_SOP.md
 │   ├─ LEGAL_DOCUMENTS_SOP.md
 │   ├─ CONTENT_DOCUMENTS_SOP.md
 │   └─ INTEGRATION_PLATFORMS_MANAGEMENT_SOP.md
@@ -529,7 +474,6 @@ Layer 7 (Guides):
 │   ├─ SOP_TEMPLATE.md
 │   └─ render.yaml.template
 ├─ docs/07-guides/INFRASTRUCTURE_AUTHENTICATION_CORE_FLOW.md
-├─ docs/07-guides/INFRASTRUCTURE_AUTH_AND_PUSH_OPTIONS.md
 ├─ docs/07-guides/INFRASTRUCTURE_RENDER_STANDARD_SETUP.md
 └─ docs/07-guides/INFRASTRUCTURE_OPTIMAL_FRONTEND_BACKEND_ARCHITECTURE.md
 
@@ -539,18 +483,18 @@ Layer 8 (Status - Structure Only):
 ├─ docs/08-status/ACTIVE_WORK_LOG.md (format, reset contents)
 ├─ docs/08-status/INTEGRITY_CHECK_LOG.md (format, reset contents)
 ├─ docs/08-status/IMPLEMENTATION_VERIFICATION.md (format, reset contents)
-├─ docs/08-status/feature-requests/ (folder + README, deprecated—use GitHub Project)
+├─ docs/08-status/feature-requests/ (folder + README)
+├─ docs/08-status/feature-requests/completed/ (folder)
 ├─ docs/08-status/screen-examination/ (folder + README)
 ├─ docs/08-status/backend-examination/ (folder + README)
 ├─ docs/08-status/user-flows/ (folder)
-├─ docs/08-status/reports/ (folder + README; Project-based)
+├─ docs/08-status/reports/ (folder + README + REPORT_LOG format)
 ├─ docs/08-status/qa/ (folder)
 ├─ docs/08-status/decisions/ (folder)
-├─ docs/08-status/scope-of-work/ (folder)
-└─ docs/08-status/agent-coordination/ (folder + README + AGENT_DIRECTIVES + AGENT_COORDINATION_LOG + AGENT_PROMPTS + AGENT_COORDINATION_QUICK_START + SUBAGENT_TRANSITION_PLAN)
+└─ docs/08-status/scope-of-work/ (folder)
 ```
 
-**Total: ~50 infrastructure files + folder structure**
+**Total: ~45 infrastructure files + folder structure**
 
 ---
 
@@ -575,11 +519,11 @@ Layer 5 (Integrations):
 Layer 6 (Operations - Contents Only):
 ├─ docs/06-operations/legal/* (replace legal doc contents)
 ├─ docs/06-operations/content/* (replace content doc contents)
-└─ docs/06-operations/architecture/* (project-specific SOPs like SOURCEAPP_*, CHEQPASS_*)
+└─ docs/06-operations/architecture/* (project-specific SOPs like SOURCEAPP_*)
 
 Layer 8 (Status - Contents Only):
 ├─ docs/08-status/CURRENT_STATUS.md (replace with project status)
-├─ Feature requests → GitHub Project (not docs)
+├─ docs/08-status/feature-requests/* (replace with project features)
 ├─ docs/08-status/screen-examination/* (replace with project reports)
 ├─ docs/08-status/backend-examination/* (replace with project reports)
 └─ All other status contents (reset or fill per project)
@@ -613,7 +557,8 @@ Layer 8 (Status - Contents Only):
 - Gap identification
 - Local phase migration
 
-### Management System (3 files)
+### Management System (4 files)
+- Environment variables
 - Legal documents
 - Content documents
 - Integration platforms
@@ -652,7 +597,7 @@ Layer 8 (Status - Contents Only):
 
 1. **Identify file** in this inventory
 2. **Update in source project** (e.g., SourceApp)
-3. **Copy to other projects** (e.g., Cheqpass)
+3. **Copy to other projects** (if using shared infrastructure)
 4. **Update this inventory** if adding new infrastructure
 
 ### For Determining Reusability:
@@ -682,26 +627,6 @@ When adding new infrastructure, verify:
 ## Recent Additions
 
 ### 2026-01-28:
-- ✅ Added: `GITHUB_COORDINATION_SETUP_GUIDE.md` (Layer 7)
-  - Complete setup guide for GitHub Projects + Discussions as agent coordination
-  - Run when bootstrapping new project; ensures worktree-consistent coordination from day one
-- ✅ Added: `GITHUB_COORDINATION_MIGRATION_PLAN.md` (Layer 8)
-  - Migration plan for existing projects moving from docs to GitHub
-- ✅ Updated: `AGENT_COORDINATION_SOP.md`, `AGENT_SESSION_HOOK_SOP.md` — GitHub-first versions
-- ✅ Updated: `ACTIVE_WORK_SOP.md` — GitHub mode (Project items) + docs mode
-- ✅ Updated: `docs/08-status/agent-coordination/README.md` — "Coordination lives in GitHub"
-- ✅ Updated: `AI.md` — Coordination section points to GitHub Project
-- ✅ Updated: `BOOTSTRAP_NEW_PROJECT.md` — Step: Run GitHub Coordination Setup Guide
-- ✅ Added: `PROJECT_DOCUMENTATION_HIERARCHY.md` (Layer 1)
-  - Single explanation of the docs hierarchy: what it is, why it exists, how it works
-  - For humans and agents
-- ✅ Added: `GLOBAL_AI_AGENT_RULES.md` (Layer 1)
-  - Project-agnostic rules for all AI agents; optimized for context consumption
-  - Documents hierarchy, separation of concerns, worktree redirects, coordination patterns
-- ✅ Added: `AGENT_COORDINATION_SOP.md`, `AGENT_SESSION_HOOK_SOP.md` (Layer 6)
-  - Agent-to-agent communication; hook command "Report to the agent team"
-- ✅ Added: `docs/08-status/agent-coordination/` (Layer 8)
-  - Folder structure: README, AGENT_DIRECTIVES, AGENT_COORDINATION_LOG, BREAKOUT_TEMPLATE, AGENT_PROMPTS, AGENT_COORDINATION_QUICK_START
 - ✅ Added: `INFRASTRUCTURE_OPTIMAL_FRONTEND_BACKEND_ARCHITECTURE.md` (Layer 7)
   - Brand-agnostic pattern for React marketing + Flutter app + TypeScript backend
   - Includes deep links, SEO rationale, technology comparisons
@@ -711,7 +636,7 @@ When adding new infrastructure, verify:
 
 ## Summary
 
-**Total Infrastructure Files:** ~50 files  
+**Total Infrastructure Files:** ~45 files  
 **Total Folder Structures:** ~12 folders  
 **Reusable Patterns:** 3 major patterns (Auth, Render, Architecture)  
 **Templates:** 3 templates (Feature Note, SOP, render.yaml)  
