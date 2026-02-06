@@ -59,8 +59,19 @@ Use `/web`, `/webapp`, or `/mobile` instead of `/backend` as needed. Derive owne
 
 - Create Project directives and feature requests
 - Respond to Project Q&A where you are target
+- **Review and close** — After subagents complete work and post reports, review the work and close issues
 - **Infrastructure lock** — Only you may change files in CORE_INFRASTRUCTURE_INVENTORY
 - When infrastructure changes: include "Update worktrees" in directives — commit first, then `git fetch origin main && git merge origin/main`
+
+## Review and closure workflow
+
+After delegating to subagents:
+
+1. **Subagent completes** → Posts report to Project item → Leaves OPEN → Reports back to you
+2. **You review** → Check files changed, verify requirements met, assess quality
+3. **You close** → Close issue with verification comment or request changes if needed
+
+**Why:** You are the quality gate. Subagents implement; you verify before closure.
 
 ## What you must not do
 

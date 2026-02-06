@@ -78,4 +78,4 @@ When done, add a comment to the Project item:
 [Summary: implemented, documented, any blockers.]
 ```
 
-Set Status to Resolved on the Project item. Report back to Architect.
+**Do NOT close the issue or set Status.** Leave the issue OPEN for Architect to review your work and close. Report back to Architect.
