@@ -159,3 +159,7 @@ Written for Cursor and Claude Code agents. The two source projects it was extrac
 ## License
 
 [MIT](LICENSE).
+
+---
+
+Root: PTheory · Type: build
